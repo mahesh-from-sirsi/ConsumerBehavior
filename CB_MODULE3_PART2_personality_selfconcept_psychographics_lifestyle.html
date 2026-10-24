@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VTU MBA Consumer Behaviour — Personality, Self-Concept, Psychographics & Lifestyle</title>
+<style>
+:root{--ink:#172033;--muted:#596579;--paper:#f5f7fb;--card:#fff;--line:#dce3ee;--blue:#2457a7;--blue2:#eaf1ff;--teal:#0f766e;--amber:#fff4d8;--pink:#fff0f3;--green:#eaf8f0}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.58 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:linear-gradient(125deg,#eaf1ff,#e8f7f4);padding:28px max(18px,calc((100% - 1120px)/2));border-bottom:1px solid var(--line)}
+header h1{line-height:1.15;font-size:clamp(1.8rem,4vw,2.7rem);max-width:950px;margin:.2rem 0 .7rem}
+header p{max-width:900px;color:#34445f;margin:.4rem 0}
+main{max-width:1120px;margin:auto;padding:18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
+button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+.tab,.btn{border:1px solid #c9d5e8;background:#fff;border-radius:11px;padding:9px 13px;color:#20314e}
+.tab[aria-selected=true]{background:var(--blue);color:white;border-color:var(--blue)}
+.btn.primary{background:var(--blue);color:white;border-color:var(--blue)}
+.panel{display:none;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(16px,3vw,28px);box-shadow:0 4px 18px #1b31520a}
+.panel.active{display:block}.panel h2{margin-top:0;font-size:1.65rem}.panel h3{margin-top:1.4rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:14px;padding:15px;background:#fff}
+.card h3,.card h4{margin-top:0}.muted{color:var(--muted);font-size:.94rem}
+.callout{padding:13px 16px;border-radius:12px;background:var(--blue2);border-left:4px solid var(--blue);margin:14px 0}
+.warning{background:var(--amber);border-left-color:#b7791f}.good{background:var(--green);border-left-color:var(--teal)}
+.pink{background:var(--pink);border-left-color:#be4561}
+.visual{background:#f8faff;border:1px solid var(--line);border-radius:14px;padding:12px;margin:16px 0;overflow:hidden}
+.visual svg{width:100%;height:auto;display:block;max-height:290px}
+.pills{display:flex;gap:7px;flex-wrap:wrap}.pill{padding:4px 9px;border:1px solid var(--line);border-radius:99px;background:#fff;font-size:.88rem}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.95rem}th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}th{background:#eef3fb}
+.quiz-q{padding:15px;border:1px solid var(--line);border-radius:12px;margin:12px 0}.quiz-q label{display:block;margin:6px 0;cursor:pointer}
+.feedback{font-weight:600;margin-top:7px}.correct{color:#087443}.incorrect{color:#b42318}
+textarea{width:100%;min-height:85px;border:1px solid #bdc9db;border-radius:10px;padding:10px;font:inherit}
+footer{max-width:1120px;margin:auto;padding:20px;color:var(--muted);font-size:.9rem}
+@media(max-width:600px){main{padding:10px}.panel{padding:15px}.tab{flex:1 1 auto}}
+@media print{@page{size:auto;margin:14mm}body{background:white;color:#111;font-size:11pt}header{background:white!important;color:black!important;padding:8px 0}header p{color:#333!important}.tabs,.btn,.no-print,.audio-status{display:none!important}main{max-width:none;padding:0}.panel,.panel[hidden],.panel:not(.active){display:block!important;visibility:visible!important;height:auto!important;overflow:visible!important;border:0;padding:10px 0;margin:0;box-shadow:none;break-inside:auto}.panel h2,.panel h3{break-after:avoid}.visual,.card,.callout{break-inside:avoid}svg{max-width:100%}a{color:#111}}
+</style>
+</head>
+<body>
+<header>
+  <div class="pills"><span class="pill">VTU MBA • Consumer Behaviour</span><span class="pill">Interactive learning explorer</span><span class="pill">Self-paced • Exam-focused</span></div>
+  <h1>Personality, Self-Concept, Psychographics & Lifestyle</h1>
+  <p>Understand why two people can buy different products even when they have similar needs. Explore the concepts through visuals, Indian-market examples, corporate illustrations, read-aloud notes, a quiz and exam-answer scaffolds.</p>
+  <p class="muted">Study tip: learn the definition → understand the framework → connect it to a buying example → practise writing the answer in your own words.</p>
+</header>
+<main>
+<div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0">
+<button class="btn" id="printPage" type="button">Print / Save as PDF</button>
+<button class="btn" id="stopAudio" type="button">Stop audio</button>
+<span id="audioStatus" class="muted audio-status" role="status" aria-live="polite"></span>
+</div>
+<nav class="tabs" role="tablist" aria-label="Learning sections">
+<button class="tab" role="tab" tabindex="0" aria-selected="true" data-tab="nature">1. Nature</button>
+<button class="tab" role="tab" tabindex="-1" aria-selected="false" data-tab="theories">2. Theories</button>
+<button class="tab" role="tab" tabindex="-1" aria-selected="false" data-tab="self">3. Self-concept</button>
+<button class="tab" role="tab" tabindex="-1" aria-selected="false" data-tab="psycho">4. Psychographics</button>
+<button class="tab" role="tab" tabindex="-1" aria-selected="false" data-tab="cases">5. Cases</button>
+<button class="tab" role="tab" tabindex="-1" aria-selected="false" data-tab="exam">6. Quiz & exam prep</button>
+</nav>
+
+<section class="panel active" id="nature" role="tabpanel">
+<h2>1. Personality: meaning and nature</h2>
+<p><strong>Personality</strong> refers to relatively enduring psychological characteristics and patterns that influence how a person thinks, feels and behaves. In consumer behaviour, personality may help explain preferences, but it does not determine every purchase.</p>
+<div class="visual">
+<svg viewBox="0 0 900 210" role="img" aria-label="Personality influences preferences, but situation and culture also influence purchase behaviour">
+<rect x="15" y="54" width="190" height="90" rx="15" fill="#eaf1ff" stroke="#2457a7" stroke-width="2"/><text x="110" y="91" font-size="20" font-weight="700" text-anchor="middle" fill="#172033">Personality</text><text x="110" y="117" font-size="14" text-anchor="middle" fill="#34445f">relatively stable traits</text>
+<path d="M205 99 H267" stroke="#596579" stroke-width="3"/><path d="M257 91 L268 99 L257 107" fill="none" stroke="#596579" stroke-width="3"/>
+<rect x="270" y="54" width="190" height="90" rx="15" fill="#e8f7f4" stroke="#0f766e" stroke-width="2"/><text x="365" y="91" font-size="19" font-weight="700" text-anchor="middle" fill="#172033">Preferences</text><text x="365" y="117" font-size="14" text-anchor="middle" fill="#34445f">what feels appealing</text>
+<path d="M460 99 H522" stroke="#596579" stroke-width="3"/><path d="M512 91 L523 99 L512 107" fill="none" stroke="#596579" stroke-width="3"/>
+<rect x="525" y="54" width="190" height="90" rx="15" fill="#fff4d8" stroke="#b7791f" stroke-width="2"/><text x="620" y="91" font-size="19" font-weight="700" text-anchor="middle" fill="#172033">Choice tendency</text><text x="620" y="117" font-size="14" text-anchor="middle" fill="#34445f">not a guarantee</text>
+<rect x="735" y="36" width="150" height="126" rx="12" fill="#fff0f3" stroke="#be4561" stroke-width="2"/><text x="810" y="68" font-size="15" font-weight="700" text-anchor="middle" fill="#172033">Also shaped by</text><text x="810" y="94" font-size="13" text-anchor="middle" fill="#172033">price • family</text><text x="810" y="116" font-size="13" text-anchor="middle" fill="#172033">culture • occasion</text><text x="810" y="138" font-size="13" text-anchor="middle" fill="#172033">availability</text>
+<path d="M735 99 H717" stroke="#596579" stroke-width="3" stroke-dasharray="4 4"/>
+<text x="450" y="190" text-anchor="middle" font-size="14" fill="#596579">A useful explanation of behaviour—not a perfect prediction of an individual.</text>
+</svg>
+</div>
+<h3>Nature / characteristics of personality</h3>
+<div class="grid">
+<div class="card"><h3>Individual differences</h3><p>People vary in sociability, curiosity, risk tolerance, orderliness and other characteristics.</p><p class="muted">Example: one buyer enjoys trying a new phone brand; another waits for years of reviews.</p></div>
+<div class="card"><h3>Relatively consistent</h3><p>Some tendencies recur across situations, but behaviour can still change with context.</p><p class="muted">A price-conscious shopper may still pay more for an urgent medical need.</p></div>
+<div class="card"><h3>Develops over time</h3><p>Biology, learning, culture, relationships and experience may contribute to personality.</p><p class="muted">A person may become more confident using technology after positive experiences.</p></div>
+<div class="card"><h3>Not the only influence</h3><p>Personality interacts with income, goals, social norms, product category and situation.</p><p class="muted">An adventurous person may still choose the safest available helmet.</p></div>
+</div>
+<div class="callout"><strong>Exam-ready point:</strong> Personality is a useful segmentation and interpretation variable, but marketers should not assume every person with a particular trait will behave identically.</div>
+<h3>Consumer diversity and personality-linked concepts</h3>
+<table><tr><th>Concept</th><th>Simple meaning</th><th>Possible marketing use</th></tr>
+<tr><td>Consumer innovativeness</td><td>Willingness to try new products or ideas</td><td>Early product demos, beta communities, trial offers</td></tr>
+<tr><td>Need for cognition</td><td>Enjoyment of thinking carefully about information</td><td>Detailed comparisons, specifications and explainers</td></tr>
+<tr><td>Materialism</td><td>How central possessions and acquisition are to a person’s goals or identity</td><td>Study status-signalling appeals carefully; avoid equating possessions with worth</td></tr>
+<tr><td>Consumer ethnocentrism</td><td>Belief that buying domestic products is preferable, sometimes for moral or economic reasons</td><td>Communicate credible local sourcing and employment contributions</td></tr></table>
+<button class="btn speak" type="button">🔊 Read this section</button>
+</section>
+
+<section class="panel" id="theories" role="tabpanel">
+<h2>2. Major theories of personality</h2>
+<p>For VTU-style answers, focus on <strong>Freudian (psychoanalytic), Neo-Freudian (social-psychological) and Trait theories</strong>, plus what each may mean for marketing.</p>
+<div class="grid">
+<div class="card">
+<h3>Freudian theory</h3>
+<p>Sigmund Freud proposed that behaviour can be influenced by unconscious motives and inner conflicts.</p>
+<div class="visual"><svg viewBox="0 0 320 190" role="img" aria-label="Id seeks immediate gratification, ego balances reality, superego represents moral standards"><rect x="8" y="8" width="304" height="48" rx="10" fill="#fff0f3" stroke="#be4561"/><text x="160" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#172033">ID</text><text x="160" y="45" text-anchor="middle" font-size="12" fill="#172033">“I want it now.”</text><rect x="8" y="70" width="304" height="48" rx="10" fill="#eaf1ff" stroke="#2457a7"/><text x="160" y="90" text-anchor="middle" font-size="16" font-weight="700" fill="#172033">EGO</text><text x="160" y="107" text-anchor="middle" font-size="12" fill="#172033">“What is realistic?”</text><rect x="8" y="132" width="304" height="48" rx="10" fill="#eaf8f0" stroke="#0f766e"/><text x="160" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#172033">SUPEREGO</text><text x="160" y="169" text-anchor="middle" font-size="12" fill="#172033">“What is right?”</text></svg></div>
+<p><strong>Consumer example:</strong> someone wants an expensive branded watch (id), checks the budget and long-term needs (ego), and considers whether the purchase conflicts with personal values (superego).</p>
+<p class="muted">Marketing implication: symbolic, emotional and identity-related motives may matter. These are conceptual interpretations, not a reliable way to diagnose a customer’s unconscious motives.</p>
+</div>
+<div class="card">
+<h3>Neo-Freudian theory</h3>
+<p>Neo-Freudian thinkers gave more attention to social relationships, culture, anxiety and the need for belonging or recognition.</p>
+<ul><li><strong>Alfred Adler:</strong> striving for competence or overcoming feelings of inferiority.</li><li><strong>Karen Horney:</strong> described broad coping orientations often summarised as moving toward, against or away from people.</li><li><strong>Harry Stack Sullivan:</strong> emphasised interpersonal relationships.</li></ul>
+<p><strong>Consumer example:</strong> a buyer chooses a particular clothing brand to feel accepted by a peer group, stand out, or avoid unwanted attention.</p>
+<p class="muted">Marketing implication: reference groups, belonging, individuality and social approval can shape brand meaning.</p>
+</div>
+<div class="card">
+<h3>Trait theory</h3>
+<p>Traits are measurable dimensions on which people differ. Modern trait approaches often use the <strong>Big Five</strong>.</p>
+<table><tr><th>Trait</th><th>Possible consumer tendency (not a rule)</th></tr>
+<tr><td>Openness</td><td>Interest in novelty and new experiences</td></tr>
+<tr><td>Conscientiousness</td><td>Planning, comparing and careful use</td></tr>
+<tr><td>Extraversion</td><td>Enjoyment of social or stimulating experiences</td></tr>
+<tr><td>Agreeableness</td><td>Cooperative or harmony-oriented preferences</td></tr>
+<tr><td>Neuroticism / low emotional stability</td><td>Greater sensitivity to stress or uncertainty in some contexts</td></tr></table>
+<p><strong>Marketing implication:</strong> trait scales can support research and segmentation, but require valid measurement and should not be used to stereotype individuals.</p>
+</div>
+</div>
+<h3>Quick comparison</h3>
+<table><tr><th>Theory</th><th>Main focus</th><th>Useful marketing lens</th><th>Limitation</th></tr>
+<tr><td>Freudian</td><td>Unconscious motives and inner conflict</td><td>Emotional and symbolic meanings</td><td>Hard to verify a specific hidden motive from one purchase</td></tr>
+<tr><td>Neo-Freudian</td><td>Social relationships and coping</td><td>Belonging, status, independence</td><td>Broad ideas can be difficult to measure precisely</td></tr>
+<tr><td>Trait</td><td>Measurable individual differences</td><td>Research-based segmentation</td><td>Traits do not fully explain context-specific behaviour</td></tr></table>
+<div class="callout warning"><strong>Common exam trap:</strong> Do not confuse personality with attitude. Personality is a broader pattern of characteristics; an attitude is an evaluation of a particular object, person, idea or behaviour.</div>
+<button class="btn speak" type="button">🔊 Read this section</button>
+</section>
+
+<section class="panel" id="self" role="tabpanel">
+<h2>3. Self-concept and self-image</h2>
+<p><strong>Self-concept</strong> is the collection of beliefs and feelings a person has about who they are. Products can be chosen for practical benefits and for how they fit, express or help shape the consumer’s identity.</p>
+<div class="visual"><svg viewBox="0 0 800 260" role="img" aria-label="Four self-concept dimensions: actual self, ideal self, social self and ideal social self"><circle cx="400" cy="130" r="55" fill="#2457a7"/><text x="400" y="124" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">MY</text><text x="400" y="148" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">SELF</text><rect x="20" y="30" width="250" height="72" rx="14" fill="#eaf1ff" stroke="#2457a7" stroke-width="2"/><text x="145" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#172033">Actual self</text><text x="145" y="80" text-anchor="middle" font-size="13" fill="#34445f">How I see myself now</text><rect x="530" y="30" width="250" height="72" rx="14" fill="#e8f7f4" stroke="#0f766e" stroke-width="2"/><text x="655" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#172033">Ideal self</text><text x="655" y="80" text-anchor="middle" font-size="13" fill="#34445f">Who I would like to be</text><rect x="20" y="158" width="250" height="72" rx="14" fill="#fff4d8" stroke="#b7791f" stroke-width="2"/><text x="145" y="186" text-anchor="middle" font-size="17" font-weight="700" fill="#172033">Social self</text><text x="145" y="208" text-anchor="middle" font-size="13" fill="#34445f">How I think others see me</text><rect x="530" y="158" width="250" height="72" rx="14" fill="#fff0f3" stroke="#be4561" stroke-width="2"/><text x="655" y="186" text-anchor="middle" font-size="17" font-weight="700" fill="#172033">Ideal social self</text><text x="655" y="208" text-anchor="middle" font-size="13" fill="#34445f">How I want others to see me</text><path d="M270 66 L345 110 M530 66 L455 110 M270 194 L345 150 M530 194 L455 150" stroke="#596579" stroke-width="2" fill="none"/></svg></div>
+<table><tr><th>Concept</th><th>Meaning</th><th>Example</th></tr>
+<tr><td>Actual self</td><td>How I currently see myself</td><td>“I am practical and prefer simple clothes.”</td></tr>
+<tr><td>Ideal self</td><td>Who I would like to become</td><td>“I want to become a confident public speaker.”</td></tr>
+<tr><td>Social self</td><td>How I believe others currently see me</td><td>“My classmates see me as dependable.”</td></tr>
+<tr><td>Ideal social self</td><td>How I want others to see me</td><td>“I want colleagues to see me as creative.”</td></tr></table>
+<h3>Related concepts</h3>
+<div class="grid">
+<div class="card"><h3>Self-esteem</h3><p>How positively or negatively someone evaluates their own worth. It is related to, but not identical to, self-concept.</p></div>
+<div class="card"><h3>Extended self</h3><p>Possessions or places can become part of a person’s identity—for example, a musician’s instrument, a family heirloom or a well-used bicycle.</p></div>
+<div class="card"><h3>Multiple selves</h3><p>A person may express different aspects of identity across roles and situations: student, friend, employee, parent or hobbyist.</p></div>
+<div class="card"><h3>Self-image congruence</h3><p>Consumers may prefer brands whose perceived image fits their actual or ideal self. The match can be symbolic, practical or social.</p></div>
+</div>
+<div class="callout good"><strong>Marketing example:</strong> an outdoor brand may appeal to a consumer’s actual identity (“I enjoy trekking”) or ideal identity (“I want to become more adventurous”). A useful campaign should still make credible product claims.</div>
+<h3>How self-concept may influence purchase</h3>
+<ol><li>A person holds beliefs about themselves or who they want to become.</li><li>A brand carries functional and symbolic meanings.</li><li>The person perceives a fit—or mismatch—between brand and self.</li><li>This fit can affect preference, but price, quality, access and context still matter.</li></ol>
+<div class="callout warning">Do not assume that a consumer’s possessions reveal their complete personality or social worth. The same product can mean different things to different people.</div>
+<button class="btn speak" type="button">🔊 Read this section</button>
+</section>
+
+<section class="panel" id="psycho" role="tabpanel">
+<h2>4. Psychographics and lifestyle</h2>
+<p><strong>Psychographics</strong> describes consumers using psychological and lifestyle-related characteristics—especially <strong>Activities, Interests and Opinions (AIO)</strong>. It helps marketers understand how people live, what matters to them and how they may use products.</p>
+<div class="visual"><svg viewBox="0 0 850 225" role="img" aria-label="Psychographic AIO framework: activities, interests, opinions combine to describe lifestyle patterns and inform segmentation"><rect x="15" y="25" width="225" height="65" rx="13" fill="#eaf1ff" stroke="#2457a7" stroke-width="2"/><text x="127" y="52" text-anchor="middle" font-size="18" font-weight="700" fill="#172033">A — Activities</text><text x="127" y="73" text-anchor="middle" font-size="13" fill="#34445f">What I do</text><rect x="15" y="105" width="225" height="65" rx="13" fill="#e8f7f4" stroke="#0f766e" stroke-width="2"/><text x="127" y="132" text-anchor="middle" font-size="18" font-weight="700" fill="#172033">I — Interests</text><text x="127" y="153" text-anchor="middle" font-size="13" fill="#34445f">What I care about</text><rect x="15" y="185" width="225" height="30" rx="10" fill="#fff4d8" stroke="#b7791f" stroke-width="2"/><text x="127" y="205" text-anchor="middle" font-size="16" font-weight="700" fill="#172033">O — Opinions</text><path d="M240 58 L300 100 M240 138 L300 115 M240 200 L300 130" stroke="#596579" stroke-width="2" fill="none"/><rect x="300" y="68" width="230" height="100" rx="15" fill="#fff" stroke="#596579" stroke-width="2"/><text x="415" y="100" text-anchor="middle" font-size="18" font-weight="700" fill="#172033">Lifestyle profile</text><text x="415" y="125" text-anchor="middle" font-size="14" fill="#34445f">Patterns of living</text><text x="415" y="146" text-anchor="middle" font-size="13" fill="#34445f">and priorities</text><path d="M530 118 H585" stroke="#596579" stroke-width="3"/><path d="M575 110 L586 118 L575 126" fill="none" stroke="#596579" stroke-width="3"/><rect x="590" y="68" width="245" height="100" rx="15" fill="#fff0f3" stroke="#be4561" stroke-width="2"/><text x="712" y="100" text-anchor="middle" font-size="18" font-weight="700" fill="#172033">Segmentation</text><text x="712" y="125" text-anchor="middle" font-size="14" fill="#34445f">Products • messages</text><text x="712" y="146" text-anchor="middle" font-size="14" fill="#34445f">channels • experiences</text></svg></div>
+<table><tr><th>AIO element</th><th>Questions marketers might ask</th><th>Illustrative answer</th></tr>
+<tr><td>Activities</td><td>How do consumers spend time?</td><td>Walking, gaming, cooking, volunteering, travelling</td></tr>
+<tr><td>Interests</td><td>What attracts their attention?</td><td>Fitness, technology, local food, fashion, personal finance</td></tr>
+<tr><td>Opinions</td><td>What do they believe or evaluate?</td><td>Views on sustainability, convenience, value, innovation or local products</td></tr></table>
+<h3>Demographics vs psychographics</h3>
+<table><tr><th>Demographics</th><th>Psychographics</th></tr><tr><td>Age, income, occupation, location, education</td><td>Activities, interests, opinions, values, motivations and lifestyle patterns</td></tr><tr><td>“Who is the consumer?”</td><td>“How do they live, what do they care about, and why might they choose?”</td></tr><tr><td>Example: 22-year-old student in Shivamogga</td><td>Example: student who enjoys weekend hikes, values durability and compares price carefully</td></tr></table>
+<h3>How psychographic research is done</h3>
+<ol><li>Define the decision the research should support.</li><li>Ask clear, non-leading questions about activities, interests, opinions and relevant values.</li><li>Collect responses ethically and with appropriate consent.</li><li>Look for meaningful patterns; validate segments with behaviour where possible.</li><li>Design and test messages or offerings for the segments.</li></ol>
+<div class="callout warning"><strong>Important:</strong> psychographic segments are research-based patterns, not rigid boxes. Avoid sensitive or invasive inferences, and do not treat an illustrative segment as an established fact about real consumers.</div>
+<h3>VALS and lifestyle segmentation</h3>
+<p>VALS is a proprietary psychographic segmentation framework developed by Strategic Business Insights (SBI) for the U.S. market. It groups consumers using psychological traits and resources. In exam answers, explain the purpose of VALS; do not claim that U.S. segment labels automatically describe Indian consumers without validation.</p>
+<div class="grid">
+<div class="card"><h3>Example segment A: “Active explorers”</h3><p>Illustrative profile: outdoor activities, interest in travel, opinions favouring durability and practical design.</p><p class="muted">Possible offering: robust bags, repair information, clear performance specifications.</p></div>
+<div class="card"><h3>Example segment B: “Convenience-first planners”</h3><p>Illustrative profile: busy schedules, interest in time-saving services, opinions favouring predictable costs.</p><p class="muted">Possible offering: easy reordering, transparent fees, dependable delivery windows.</p></div>
+</div>
+<button class="btn speak" type="button">🔊 Read this section</button>
+</section>
+
+<section class="panel" id="cases" role="tabpanel">
+<h2>5. Corporate illustrations and teaching cases</h2>
+<p>Use these as applications of the concepts. A brand’s positioning is not proof that every customer has the personality or lifestyle described.</p>
+<div class="card">
+<h3>Case A — Nike: brand meaning and the aspirational self</h3>
+<p>Nike’s “Just Do It” platform and athlete-centred storytelling can be discussed through the lens of an ideal self: a consumer may want to see themselves as active, disciplined or sporty. Products can also have functional value, such as fit and performance.</p>
+<p><strong>Discuss:</strong> Which part relates to self-concept? Which part relates to product performance? What evidence would you collect before claiming the campaign changed buying behaviour?</p>
+<p class="muted">Source for conceptual context: <a href="https://opentextbc.ca/introconsumerbehaviour/chapter/self-identity/" target="_blank" rel="noopener">OpenTextBC — Self and Identity</a>. This is an analytical illustration, not a causal claim about Nike campaign effectiveness.</p>
+</div>
+<div class="card">
+<h3>Case B — Apple: perceived brand personality and identity fit</h3>
+<p>Some consumers may interpret Apple products as creative, premium or design-focused; other consumers may focus on ecosystem compatibility, accessibility or total cost. These are perceptions that should be researched, not universal facts about every buyer.</p>
+<p><strong>Discuss:</strong> How does brand personality differ from product features? How could self-image congruence influence preference? What competing explanation might account for the same purchase?</p>
+<p class="muted">Source for brand-personality framework: <a href="https://doi.org/10.1146/annurev-psych-010419-051008" target="_blank" rel="noopener">Annual Review of Psychology — Psychological Underpinnings of Brands</a>.</p>
+</div>
+<div class="card">
+<h3>Case C — Decathlon: lifestyle and activity-based segmentation</h3>
+<p>A sports retailer can organise products around activities such as walking, cycling, swimming and camping. This is a useful way to discuss lifestyle and usage needs; it does not mean that all people who do the same activity have the same personality or budget.</p>
+<p><strong>Discuss:</strong> Is activity-based segmentation psychographic, behavioural or both? What additional information would improve the segment?</p>
+<p class="muted">This is an illustrative retail analysis; validate any claim about the company’s current segmentation strategy with company-specific evidence before citing it as fact.</p>
+</div>
+<div class="callout good"><strong>Mini-case — choosing a backpack:</strong> Three MBA students have the same budget. A trekking enthusiast prioritises durability and weather resistance; a fashion-conscious student prioritises appearance and brand symbolism; a commuter prioritises laptop protection and organisation. Their lifestyles, goals and self-images help explain different priorities—but price and product quality still matter.</div>
+<h3>Student task (private, no presentation required)</h3>
+<p>Choose one everyday product—shoes, phone, backpack, scooter, skincare or food delivery. Write down (1) one personality-related tendency, (2) one self-concept dimension, (3) two AIO indicators and (4) one alternative explanation such as price or availability.</p>
+<textarea id="caseAnswer" placeholder="Your notes: product, likely motivation, self-concept, AIO indicators, alternative explanation…"></textarea>
+<button class="btn" id="saveCase" type="button">Keep notes on this page</button>
+<span id="caseStatus" class="muted" role="status" aria-live="polite"></span>
+<p class="muted">Notes remain only while this page is open; they are not uploaded or saved to a server.</p>
+<button class="btn speak" type="button">🔊 Read this section</button>
+</section>
+
+<section class="panel" id="exam" role="tabpanel">
+<h2>6. Quiz, answer practice and revision</h2>
+<p>Choose an answer for each question, then select <strong>Check answers</strong>. This is a practice activity, not a graded assessment.</p>
+<div id="quiz"></div>
+<button class="btn primary" id="checkQuiz" type="button">Check answers</button>
+<button class="btn" id="resetQuiz" type="button">Reset quiz</button>
+<p id="quizScore" role="status" aria-live="polite"></p>
+<h3>Short-answer practice</h3>
+<div class="card"><strong>1. Distinguish personality and self-concept.</strong><p class="muted">Tip: personality concerns relatively enduring patterns; self-concept concerns beliefs and feelings about who I am.</p><textarea placeholder="Write a 3–5 sentence answer…"></textarea></div>
+<div class="card"><strong>2. Explain AIO with an example.</strong><p class="muted">Tip: define activities, interests and opinions; apply all three to one consumer profile.</p><textarea placeholder="Write your answer…"></textarea></div>
+<div class="card"><strong>3. How can self-concept affect brand choice?</strong><p class="muted">Tip: actual/ideal/social self → perceived brand meaning → possible fit → choice, alongside other constraints.</p><textarea placeholder="Write your answer…"></textarea></div>
+<h3>7-mark answer scaffold: Explain theories of personality and their marketing implications</h3>
+<ol><li>Define personality and state why it matters in consumer behaviour.</li><li>Explain Freudian theory (id, ego, superego) and a qualified marketing application.</li><li>Explain Neo-Freudian emphasis on social relationships and coping.</li><li>Explain trait theory and give examples of measurable traits.</li><li>Compare the theories and state one limitation.</li><li>Conclude that personality informs but does not fully determine purchase behaviour.</li></ol>
+<h3>10-mark answer scaffold: Discuss self-concept, psychographics and lifestyle in marketing</h3>
+<ol><li>Define self-concept and lifestyle/psychographics.</li><li>Explain actual, ideal, social and ideal social self.</li><li>Explain self-image congruence and the extended self with examples.</li><li>Explain AIO: activities, interests and opinions.</li><li>Distinguish demographic from psychographic segmentation.</li><li>Describe the process of creating and validating segments.</li><li>Apply to a relevant product or brand and discuss ethical limitations.</li></ol>
+<div class="callout"><strong>Last-minute revision:</strong> Freud = unconscious motives and inner conflict; Neo-Freudian = social relationships; Trait theory = measurable differences; Self-concept = how I see myself; AIO = activities, interests, opinions; Lifestyle = pattern of living.</div>
+<button class="btn speak" type="button">🔊 Read this section</button>
+</section>
+</main>
+<footer>
+<p><strong>Source and accuracy note.</strong> This explorer follows the concepts listed in the VTU MBA Consumer Behaviour syllabus, including Freudian, Neo-Freudian and Trait theories, consumer diversity, brand personality, self and self-image. Psychographics/lifestyle content extends the topic using an open educational text. It is an explanatory learning aid, not a substitute for the exact scheme-specific syllabus or prescribed textbook.</p>
+<p>Useful references: <a href="https://www.vturesource.com/vtu-syllabus/MBA/2022/3/22MBAMM303" target="_blank" rel="noopener">VTU MBA Consumer Behaviour syllabus copy</a>; <a href="https://opentextbc.ca/introconsumerbehaviour/part/personality-lifestyle-and-the-self/" target="_blank" rel="noopener">OpenTextBC — Personality, Lifestyle, and the Self</a>; <a href="https://egyankosh.ac.in/bitstream/123456789/10150/1/Unit-8.pdf" target="_blank" rel="noopener">IGNOU eGyanKosh — Personality and Self-Concept</a>.</p>
+</footer>
+<script>
+const tabs=[...document.querySelectorAll('[data-tab]')];
+function activateTab(button){
+  const target=button.dataset.tab;
+  tabs.forEach(tab=>{
+    const selected=tab===button;
+    tab.setAttribute('aria-selected',String(selected));
+    tab.setAttribute('tabindex',selected?'0':'-1');
+  });
+  document.querySelectorAll('section.panel').forEach(panel=>{
+    const active=panel.id===target;
+    panel.classList.toggle('active',active);
+    panel.hidden=!active;
+  });
+}
+tabs.forEach((button,index)=>{
+  button.addEventListener('click',()=>activateTab(button));
+  button.addEventListener('keydown',event=>{
+    let next=index;
+    if(event.key==='ArrowRight')next=(index+1)%tabs.length;
+    else if(event.key==='ArrowLeft')next=(index-1+tabs.length)%tabs.length;
+    else return;
+    event.preventDefault();tabs[next].focus();activateTab(tabs[next]);
+  });
+});
+document.querySelectorAll('section.panel').forEach(panel=>{panel.hidden=!panel.classList.contains('active');});
+let currentUtterance=null;
+function setAudioStatus(message){const status=document.getElementById('audioStatus');if(status)status.textContent=message;}
+function stopAudio(){
+  if('speechSynthesis' in window){try{window.speechSynthesis.pause();window.speechSynthesis.cancel();}catch(e){}}
+  currentUtterance=null;setAudioStatus('Audio stopped.');
+}
+function speakPanel(panel){
+  if(!('speechSynthesis' in window)||typeof SpeechSynthesisUtterance==='undefined'){
+    setAudioStatus('Text-to-speech is unavailable in this browser. Try Chrome or Edge.');
+    alert('Text-to-speech is not available in this browser. Try a recent version of Chrome or Edge.');return;
+  }
+  stopAudio();
+  const text=(panel.dataset.audio||panel.innerText).replace(/🔊 Read this section/g,'').replace(/Print\s*\/\s*Save as PDF/g,'').trim();
+  if(!text){setAudioStatus('No text found to read in this section.');return;}
+  const utterance=new SpeechSynthesisUtterance(text);currentUtterance=utterance;utterance.lang='en-IN';utterance.rate=.94;utterance.pitch=1;
+  utterance.onstart=()=>setAudioStatus('Reading aloud…');
+  utterance.onend=()=>{if(currentUtterance===utterance){currentUtterance=null;setAudioStatus('Finished reading.');}};
+  utterance.onerror=event=>{if(currentUtterance===utterance){currentUtterance=null;setAudioStatus(event.error==='canceled'?'Audio stopped.':'Audio playback failed. Check browser speech settings.');}};
+  try{window.speechSynthesis.cancel();window.speechSynthesis.resume();window.speechSynthesis.speak(utterance);setAudioStatus('Starting audio…');}
+  catch(e){setAudioStatus('Could not start audio. Open this file directly in Chrome or Edge.');}
+}
+document.querySelectorAll('.speak').forEach(button=>button.addEventListener('click',()=>speakPanel(button.closest('section.panel'))));
+document.getElementById('stopAudio').addEventListener('click',stopAudio);
+document.getElementById('printPage').addEventListener('click',()=>{try{stopAudio();window.focus();window.print();}catch(e){alert('Print dialog could not be opened. Open the file in Chrome or Edge and press Ctrl+P.');}});
+const questions=[
+{q:'Which statement best describes personality?',a:['A momentary mood only','Relatively enduring patterns that may influence behaviour','A person’s income alone','A product’s logo'],correct:1,why:'Personality concerns relatively enduring characteristics, but context still matters.'},
+{q:'In Freudian theory, which component is associated with immediate gratification?',a:['Id','Ego','Superego','Lifestyle'],correct:0,why:'The id seeks immediate gratification; the ego considers reality and the superego represents internalised standards.'},
+{q:'Neo-Freudian theories give particular attention to…',a:['Only product prices','Social relationships and interpersonal needs','Packaging dimensions only','Income alone'],correct:1,why:'Neo-Freudian approaches emphasise social and interpersonal influences.'},
+{q:'Trait theory focuses on…',a:['Measurable dimensions of individual differences','Only unconscious dreams','Only family income','The four stages of buying'],correct:0,why:'Trait theory studies relatively stable, measurable differences between individuals.'},
+{q:'“I want to become a confident public speaker” most directly expresses…',a:['Actual self','Ideal self','Social class','An activity only'],correct:1,why:'The ideal self represents who a person would like to become.'},
+{q:'What does AIO stand for in psychographics?',a:['Awareness, Intention, Outcome','Activities, Interests, Opinions','Age, Income, Occupation','Attitude, Identity, Ownership'],correct:1,why:'AIO stands for Activities, Interests and Opinions.'},
+{q:'Which is a demographic variable?',a:['Interest in trekking','Opinion about sustainability','Age','Preference for quiet holidays'],correct:2,why:'Age is demographic; the other options describe interests, opinions or lifestyle preferences.'},
+{q:'Why should marketers validate psychographic segments?',a:['Because every segment label is universally true','To check whether patterns are meaningful and useful for real decisions','To avoid collecting any data','To prove personality determines all purchases'],correct:1,why:'Segments should be tested and validated; they are not rigid universal categories.'}
+];
+const quizRoot=document.getElementById('quiz');
+questions.forEach((item,i)=>{
+ const div=document.createElement('div');div.className='quiz-q';div.dataset.index=i;
+ const title=document.createElement('p');title.innerHTML='<strong>'+(i+1)+'. '+item.q+'</strong>';div.appendChild(title);
+ item.a.forEach((answer,j)=>{
+   const label=document.createElement('label');const radio=document.createElement('input');radio.type='radio';radio.name='q'+i;radio.value=j;
+   label.appendChild(radio);label.appendChild(document.createTextNode(' '+answer));div.appendChild(label);
+ });
+ const feedback=document.createElement('div');feedback.className='feedback';feedback.id='feedback'+i;div.appendChild(feedback);quizRoot.appendChild(div);
+});
+document.getElementById('checkQuiz').addEventListener('click',()=>{
+ let score=0;
+ questions.forEach((item,i)=>{
+  const selected=document.querySelector('input[name="q'+i+'"]:checked');const feedback=document.getElementById('feedback'+i);
+  if(selected&&Number(selected.value)===item.correct){score++;feedback.className='feedback correct';feedback.textContent='Correct. '+item.why;}
+  else{feedback.className='feedback incorrect';feedback.textContent='Correct answer: '+item.a[item.correct]+'. '+item.why;}
+ });
+ document.getElementById('quizScore').textContent='Your score: '+score+' / '+questions.length+'. Review the explanations, then try again.';
+});
+document.getElementById('resetQuiz').addEventListener('click',()=>{
+ document.querySelectorAll('#quiz input').forEach(input=>input.checked=false);
+ document.querySelectorAll('#quiz .feedback').forEach(node=>{node.textContent='';node.className='feedback';});
+ document.getElementById('quizScore').textContent='';
+});
+document.getElementById('saveCase').addEventListener('click',()=>{
+ document.getElementById('caseStatus').textContent='Notes are kept in the text box while this page remains open.';
+});
+</script>
+</body>
+</html>

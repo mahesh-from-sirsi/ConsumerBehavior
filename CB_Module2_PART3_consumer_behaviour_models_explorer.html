@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consumer Behaviour Explorer | Four Models</title>
+<style>
+:root{
+  --ink:#182230;--muted:#5d6878;--paper:#f5f7fb;--card:#fff;--line:#dce3ec;
+  --blue:#dceafe;--blue-ink:#1d4ed8;--amber:#fcecc8;--amber-ink:#92400e;
+  --green:#dcf5e5;--green-ink:#166534;--violet:#eee5ff;--violet-ink:#6d28d9;
+  --focus:#111827;--shadow:0 8px 28px rgba(24,34,48,.07);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+header{background:#172b4d;color:#fff;padding:28px 20px 24px}
+.hero{max-width:1150px;margin:auto}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.76rem;font-weight:750;color:#c9d9f4}
+h1{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;margin:.45rem 0 .8rem}
+header p{max-width:780px;color:#e1e9f7;margin:0}
+.wrap{max-width:1150px;margin:0 auto;padding:22px 18px 60px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.toolbar button,.secondary{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 13px;color:var(--ink);font-weight:650}
+.toolbar button:hover,.secondary:hover{background:#edf3fa}
+.toolbar .hint{margin-left:auto;color:var(--muted);font-size:.9rem}
+.model{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);margin:18px 0;overflow:hidden}
+.model-head{padding:19px 20px 14px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:flex-start}
+.model-number{flex:0 0 42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:850}
+.model h2{margin:0;font-size:1.35rem}
+.model-head p{margin:3px 0 0;color:var(--muted)}
+.iop .model-number{background:var(--blue);color:var(--blue-ink)}
+.nicosia .model-number{background:var(--green);color:var(--green-ink)}
+.ekb .model-number{background:var(--amber);color:var(--amber-ink)}
+.hs .model-number{background:var(--violet);color:var(--violet-ink)}
+.diagram{padding:18px 20px 22px}
+.flow{display:flex;gap:10px;align-items:stretch}
+.node{flex:1;min-width:0;border:2px solid var(--line);border-radius:13px;background:#fff;text-align:left;padding:14px 13px;transition:transform .12s,border-color .12s,box-shadow .12s;color:var(--ink)}
+.node:hover{transform:translateY(-2px);box-shadow:0 5px 15px #172b4d12}
+.node strong{display:block;font-size:1rem;margin-bottom:4px}
+.node small{display:block;color:var(--muted);font-size:.84rem;line-height:1.35}
+.iop .node.active,.iop .node:hover{border-color:#5b8ee8;background:#f4f8ff}
+.nicosia .node.active,.nicosia .node:hover{border-color:#4ca87a;background:#f3fbf6}
+.ekb .node.active,.ekb .node:hover{border-color:#d49b2d;background:#fffbf0}
+.hs .node.active,.hs .node:hover{border-color:#9a75e8;background:#faf7ff}
+.arrow{display:grid;place-items:center;color:#7b8798;font-size:1.5rem;flex:0 0 16px}
+.field1{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.subhead{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;margin:0 0 8px}
+.detail{border:1px solid var(--line);border-radius:14px;background:#fbfcfe;margin:0 20px 20px;padding:18px}
+.detail-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.detail h3{margin:0 0 5px;font-size:1.2rem}
+.detail p{margin:.45rem 0}
+.pill{display:inline-block;border-radius:999px;padding:4px 9px;background:#e9eef6;color:#3e4a5c;font-size:.78rem;font-weight:750}
+.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.info{background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px}
+.info h4{margin:0 0 6px;font-size:.94rem}
+.info p,.info ul{margin:0;color:#344054;font-size:.94rem}
+.info ul{padding-left:19px}
+.info li{margin:3px 0}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.chip{border:1px solid #d7e0ed;border-radius:999px;padding:5px 9px;background:#fff;font-size:.86rem}
+.backline{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.note{border-left:4px solid #7b8aa3;background:#eef2f7;padding:12px 14px;border-radius:0 10px 10px 0;color:#344054;margin:18px 0}
+.comparison{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}
+.comparison th,.comparison td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.comparison th{background:#edf2f8;font-size:.88rem}
+.comparison td{font-size:.92rem}
+.quiz{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:22px}
+.quiz h2{margin-top:0}
+.quiz-item{border-top:1px solid var(--line);padding:14px 0}
+.quiz-item p{font-weight:700;margin:0 0 8px}
+.quiz-item label{display:block;margin:7px 0;color:#344054}
+.feedback{margin-top:7px;font-size:.92rem}
+.good{color:#166534;font-weight:700}.bad{color:#9a3412;font-weight:700}
+footer{color:var(--muted);font-size:.88rem;text-align:center;margin-top:25px}
+.hidden{display:none!important}
+@media(max-width:700px){
+ .wrap{padding:14px 10px 40px}.model-head{padding:15px}.diagram{padding:14px 12px}
+ .flow{flex-direction:column}.arrow{transform:rotate(90deg);height:15px;flex-basis:15px}
+ .field1{grid-template-columns:1fr}.detail{margin:0 12px 13px;padding:13px}
+ .detail-grid{grid-template-columns:1fr}.toolbar .hint{margin-left:0;width:100%}
+ .comparison{display:block;overflow-x:auto;white-space:normal}
+}
+@media print{
+ body{background:#fff}.toolbar,.backline,.quiz button{display:none}.model{box-shadow:none;break-inside:avoid}
+ .detail{display:block!important}.node{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <div class="eyebrow">Interactive learning map · MBA Consumer Behaviour</div>
+    <h1>Consumer Behaviour Explorer</h1>
+    <p>Explore four models through one familiar example: a student choosing a smartphone. Select any stage or construct to see what it means, how it applies, what it helps explain, and where its limits are.</p>
+  </div>
+</header>
+<main class="wrap">
+  <div class="toolbar">
+    <button id="expandAll" type="button">Show all explanations</button>
+    <button id="collapseAll" type="button">Hide explanations</button>
+    <button id="printBtn" type="button">Print / save as PDF</button>
+    <span class="hint">Tip: select a box in any diagram.</span>
+  </div>
+
+  <section class="model iop" id="iop">
+    <div class="model-head"><div class="model-number">01</div><div><h2>IOP / IPO framework</h2><p>A broad view: inputs → processing → outputs</p></div></div>
+    <div class="diagram">
+      <p class="subhead">Select a stage</p>
+      <div class="flow">
+        <button class="node active" data-model="iop" data-key="input"><strong>INPUT</strong><small>What influences the buyer?</small></button>
+        <div class="arrow">→</div>
+        <button class="node" data-model="iop" data-key="process"><strong>PROCESS</strong><small>What happens during the decision?</small></button>
+        <div class="arrow">→</div>
+        <button class="node" data-model="iop" data-key="output"><strong>OUTPUT</strong><small>What results from the process?</small></button>
+      </div>
+    </div>
+    <div class="detail" id="detail-iop" aria-live="polite"></div>
+  </section>
+
+  <section class="model nicosia" id="nicosia">
+    <div class="model-head"><div class="model-number">02</div><div><h2>Nicosia model</h2><p>Company communication, consumer response, purchase and feedback</p></div></div>
+    <div class="diagram">
+      <p class="subhead">Select a field or component</p>
+      <div class="field1">
+        <button class="node" data-model="nicosia" data-key="field1a"><strong>Field 1A</strong><small>Firm's attributes and communication</small></button>
+        <button class="node" data-model="nicosia" data-key="field1b"><strong>Field 1B</strong><small>Consumer attributes and predispositions</small></button>
+      </div>
+      <div class="flow">
+        <button class="node active" data-model="nicosia" data-key="field1"><strong>FIELD 1</strong><small>Message exposure and consumer attitude formation</small></button>
+        <div class="arrow">→</div>
+        <button class="node" data-model="nicosia" data-key="field2"><strong>FIELD 2</strong><small>Search and evaluation</small></button>
+        <div class="arrow">→</div>
+        <button class="node" data-model="nicosia" data-key="field3"><strong>FIELD 3</strong><small>Purchase act</small></button>
+        <div class="arrow">→</div>
+        <button class="node" data-model="nicosia" data-key="field4"><strong>FIELD 4</strong><small>Feedback</small></button>
+      </div>
+      <p class="note">The original model describes relationships between fields, including feedback. This simplified row is a learning map, not a complete reproduction of every connection in the formal diagram.</p>
+    </div>
+    <div class="detail" id="detail-nicosia" aria-live="polite"></div>
+  </section>
+
+  <section class="model ekb" id="ekb">
+    <div class="model-head"><div class="model-number">03</div><div><h2>Engel–Kollat–Blackwell (EKB) model</h2><p>Decision stages, influenced by information processing and personal/environmental factors</p></div></div>
+    <div class="diagram">
+      <p class="subhead">Select a decision stage or influence</p>
+      <div class="flow">
+        <button class="node active" data-model="ekb" data-key="need"><strong>1. Need recognition</strong><small>“I need a new phone.”</small></button><div class="arrow">→</div>
+        <button class="node" data-model="ekb" data-key="search"><strong>2. Information search</strong><small>“What are my options?”</small></button><div class="arrow">→</div>
+        <button class="node" data-model="ekb" data-key="evaluate"><strong>3. Evaluation</strong><small>“Which is best for me?”</small></button><div class="arrow">→</div>
+        <button class="node" data-model="ekb" data-key="purchase"><strong>4. Purchase</strong><small>“I will buy this one.”</small></button><div class="arrow">→</div>
+        <button class="node" data-model="ekb" data-key="post"><strong>5. Post-purchase</strong><small>“Was it worth it?”</small></button>
+      </div>
+      <div style="height:12px"></div>
+      <div class="flow">
+        <button class="node" data-model="ekb" data-key="processing"><strong>Information processing</strong><small>Exposure, attention, comprehension, acceptance, retention</small></button>
+        <div class="arrow">↔</div>
+        <button class="node" data-model="ekb" data-key="influences"><strong>Individual & environmental influences</strong><small>Motives, attitudes, culture, family, social class and more</small></button>
+      </div>
+    </div>
+    <div class="detail" id="detail-ekb" aria-live="polite"></div>
+  </section>
+
+  <section class="model hs" id="hs">
+    <div class="model-head"><div class="model-number">04</div><div><h2>Howard–Sheth model</h2><p>A more detailed account of stimuli, perception, learning and brand choice</p></div></div>
+    <div class="diagram">
+      <p class="subhead">Select a construct group</p>
+      <div class="flow">
+        <button class="node active" data-model="hs" data-key="stimuli"><strong>INPUTS / STIMULI</strong><small>Significative, symbolic and social stimuli</small></button><div class="arrow">→</div>
+        <button class="node" data-model="hs" data-key="perceptual"><strong>PERCEPTUAL CONSTRUCTS</strong><small>Attention, ambiguity and bias</small></button><div class="arrow">→</div>
+        <button class="node" data-model="hs" data-key="learning"><strong>LEARNING CONSTRUCTS</strong><small>Motives, choice criteria, attitudes and intention</small></button><div class="arrow">→</div>
+        <button class="node" data-model="hs" data-key="outputs"><strong>OUTPUTS</strong><small>Attention, comprehension, attitude, intention, purchase</small></button>
+      </div>
+      <div style="height:12px"></div>
+      <div class="flow">
+        <button class="node" data-model="hs" data-key="exogenous"><strong>EXOGENOUS VARIABLES</strong><small>Contextual factors that affect the decision process</small></button>
+        <div class="arrow">↔</div>
+        <button class="node" data-model="hs" data-key="feedback"><strong>FEEDBACK & EXPERIENCE</strong><small>Learning from outcomes can influence later choices</small></button>
+      </div>
+      <p class="note">This is a simplified conceptual map of the Howard–Sheth model. The full model has more specific constructs and relationships; use the exact diagram and terminology prescribed in your course material for examinations.</p>
+    </div>
+    <div class="detail" id="detail-hs" aria-live="polite"></div>
+  </section>
+
+  <section class="model">
+    <div class="model-head"><div class="model-number">↔</div><div><h2>Compare the models</h2><p>Choose a model based on the question you want to investigate.</p></div></div>
+    <div class="diagram" style="overflow-x:auto">
+      <table class="comparison">
+        <thead><tr><th>Model</th><th>Best suited to explore</th><th>Useful question</th><th>Important limitation</th></tr></thead>
+        <tbody>
+          <tr><td><strong>IOP / IPO</strong></td><td>A broad input–process–outcome view</td><td>What influences the decision, what happens, and what results?</td><td>Broad framework; detail depends on the version being used.</td></tr>
+          <tr><td><strong>Nicosia</strong></td><td>Company communication and consumer response</td><td>How might a firm's message relate to attitude, search, purchase and feedback?</td><td>May not capture every buying route equally well, such as routine or primarily habit-driven purchases.</td></tr>
+          <tr><td><strong>EKB</strong></td><td>Decision stages and influences along a consumer journey</td><td>Where might a buyer need information or leave the purchase process?</td><td>Real decisions can be shortened, repeated, skipped or non-linear.</td></tr>
+          <tr><td><strong>Howard–Sheth</strong></td><td>Perception, learning, motives and brand choice</td><td>Why might two buyers respond differently to similar stimuli?</td><td>Detailed and complex; requires care to operationalise and measure its constructs.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="quiz" id="quiz">
+    <h2>Quick self-check</h2>
+    <p>Try these privately. Choose an answer, then check the explanation. This quiz is for learning, not public scoring.</p>
+    <div id="quizItems"></div>
+    <button class="secondary" id="resetQuiz" type="button">Reset answers</button>
+  </section>
+  <footer>Learning aid for MBA Consumer Behaviour · Smartphone examples are illustrative. Follow your prescribed VTU notes for formal definitions and diagrams.</footer>
+</main>
+
+<script>
+const content = {
+ iop:{
+  input:{title:"INPUT — What influences the buyer?",tag:"IOP / IPO · Stage 1",definition:"Inputs are the stimuli, information and circumstances that may influence a consumer before or during a buying decision.",constituents:[
+   ["Marketing inputs","Advertising, price, discounts, product features, packaging, salesperson advice, brand reputation and online product pages."],
+   ["Social inputs","Family, friends, classmates, influencers, reviews, social media, events, parties and conversations."],
+   ["Personal/contextual inputs","Budget, existing phone, needs, lifestyle, urgency, past experience and availability." ]],
+   example:"A student sees a phone ad, hears a friend's recommendation, has a ₹15,000 budget and needs a better camera.",
+   use:"Use it to organise the possible influences entering a decision before examining the details.",
+   limit:"It is a broad framework. The exact categories depend on the IOP/IPO version taught in your notes."
+  },
+  process:{title:"PROCESS — What happens during the decision?",tag:"IOP / IPO · Stage 2",definition:"Processing is the set of internal and observable steps through which the consumer interprets inputs and decides what to do.",constituents:[
+   ["Attention and interpretation","The student notices the camera claim and decides whether the advertisement seems believable."],
+   ["Thinking and comparison","The student compares camera quality, battery, storage, price, reviews and alternatives."],
+   ["Influences on judgement","Motives, attitudes, knowledge, emotions, risk perception and previous experience may shape the decision."]],
+   example:"The student compares three phones, checks reviews and decides that battery life and camera quality matter most.",
+   use:"Use it as a starting point to organise the middle of a process and identify what needs closer investigation.",
+   limit:"IOP/IPO alone may not specify which psychological mechanisms operate; a more detailed model or research design may be needed."
+  },
+  output:{title:"OUTPUT — What results?",tag:"IOP / IPO · Stage 3",definition:"Outputs are the outcomes of the process. They may include an action, a choice, an attitude or a later response.",constituents:[
+   ["Purchase outcome","The student buys a particular phone, chooses another brand or delays the purchase."],
+   ["Non-purchase outcomes","The student abandons the search, waits for a discount or decides the old phone is sufficient."],
+   ["After-purchase outcomes","Satisfaction, dissatisfaction, repeat purchase, recommendation, complaint or review."]],
+   example:"The student buys a Redmi phone, later recommends it to a friend, or posts a complaint about battery life.",
+   use:"Use it to connect the decision process to outcomes a business can observe or measure.",
+   limit:"An output alone does not prove what caused it. Additional evidence is needed to infer why the consumer acted."
+  }
+ },
+ nicosia:{
+  field1:{title:"FIELD 1 — From company message to consumer attitude",tag:"Nicosia · Field 1",definition:"Field 1 links the firm's communication and attributes with the consumer's characteristics and predispositions. In the original model it is commonly divided into two subfields.",constituents:[
+   ["Field 1A: Firm","The company sends messages through advertising, product claims, price communication and other marketing communication."],
+   ["Field 1B: Consumer","The consumer brings existing attitudes, experience, needs, goals and characteristics that affect how the message is received."]],
+   example:"A brand advertises a phone's night camera. A student who enjoys photography pays attention; another student focused on battery life may not.",
+   use:"Useful when studying how marketing communication relates to consumer attitudes and later search.",
+   limit:"A message does not automatically cause purchase. Consumers may ignore it, distrust it or be influenced by other sources."
+  },
+  field1a:{title:"FIELD 1A — Firm attributes and communication",tag:"Nicosia · Field 1A",definition:"This subfield concerns the firm and the message it communicates to consumers.",constituents:[
+   ["Message content","Camera quality, battery capacity, price, warranty, software support and other product claims."],
+   ["Communication channels","Advertisements, product pages, store displays, salespeople and promotional messages."]],
+   example:"The phone company runs a campaign highlighting a long battery life and a student discount.",
+   use:"Useful for asking what the firm communicates and how a message is designed.",
+   limit:"Exposure to a message does not guarantee attention, understanding or belief."
+  },
+  field1b:{title:"FIELD 1B — Consumer attributes and predispositions",tag:"Nicosia · Field 1B",definition:"The consumer's prior attitudes and characteristics affect how the firm's communication is interpreted.",constituents:[
+   ["Needs and motives","The student wants a better camera for photography or needs a reliable phone for study."],
+   ["Prior attitudes and experience","The student trusts a brand because a previous phone worked well—or avoids it after a bad experience."],
+   ["Consumer characteristics","Budget, knowledge, preferences and other relevant personal circumstances."]],
+   example:"A student who had a good experience with Samsung may respond positively to its advertisement; another may be sceptical.",
+   use:"Useful for understanding why the same message may affect consumers differently.",
+   limit:"Consumer responses are complex; these characteristics should be investigated rather than assumed."
+  },
+  field2:{title:"FIELD 2 — Search and evaluation",tag:"Nicosia · Field 2",definition:"The consumer searches for relevant information and evaluates alternatives, influenced by the attitude and motivation developed earlier.",constituents:[
+   ["Information search","The student checks reviews, asks friends, visits a store and compares specifications."],
+   ["Evaluation","The student weighs price, camera, battery, warranty and brand trust."]],
+   example:"The student compares three phones within budget and checks whether the advertised features match independent reviews.",
+   use:"Useful for examining the path from communication and attitude formation into search and evaluation.",
+   limit:"Search may be minimal or driven by friends, habits, prior knowledge or other influences."
+  },
+  field3:{title:"FIELD 3 — Purchase act",tag:"Nicosia · Field 3",definition:"This field represents the purchase decision or action that follows the consumer's search and evaluation.",constituents:[
+   ["Choice and transaction","The student selects a model, seller and payment option."],
+   ["Barriers and alternatives","Stock availability, delivery time, financing, discounts or a last-minute recommendation may alter the outcome."]],
+   example:"The student chooses a phone and buys it online using a bank offer.",
+   use:"Useful for distinguishing a favourable attitude or intention from the actual purchase.",
+   limit:"A consumer may intend to buy but not complete the purchase because circumstances change."
+  },
+  field4:{title:"FIELD 4 — Feedback",tag:"Nicosia · Field 4",definition:"Feedback represents information from the consumer's experience and purchase outcomes that can affect the firm and future consumer behaviour.",constituents:[
+   ["Consumer response","Satisfaction, complaints, ratings, reviews, returns and recommendations."],
+   ["Firm response","The company may adjust communication, service, product features or future marketing based on feedback."]],
+   example:"The student posts a positive review about the camera but reports that the phone overheats during gaming.",
+   use:"Useful for studying post-purchase response and how consumer experience can inform future firm communication.",
+   limit:"Feedback is uneven: many consumers never post reviews, and online reviewers may not represent all buyers."
+  }
+ },
+ ekb:{
+  need:{title:"1. Need recognition",tag:"EKB · Decision stage 1",definition:"The consumer recognises a difference between the current state and a desired state.",constituents:[
+   ["Problem or need","The current phone's battery fails or it no longer supports required apps."],
+   ["Trigger","A phone breaks, a new study requirement appears, or the consumer notices a useful new feature."]],
+   example:"The student's phone keeps shutting down during online classes, creating a need for replacement.",
+   use:"Useful for understanding what triggers a buying journey and how marketers might identify customer needs.",
+   limit:"Consumers may recognise a need without acting on it; budget and priority matter."
+  },
+  search:{title:"2. Information search",tag:"EKB · Decision stage 2",definition:"The consumer seeks information to help resolve the recognised need. Search can be internal (memory) or external.",constituents:[
+   ["Internal search","Remembering brands, models and experiences already known."],
+   ["External search","Asking family or friends, reading reviews, comparing online listings, or visiting shops."]],
+   example:"The student recalls a previous brand, asks classmates and watches two comparison videos.",
+   use:"Useful for mapping information needs and finding where a business can help customers make an informed decision.",
+   limit:"Search effort varies; consumers do not always research every alternative."
+  },
+  evaluate:{title:"3. Evaluation of alternatives",tag:"EKB · Decision stage 3",definition:"The consumer compares available options using criteria that matter to them.",constituents:[
+   ["Evaluation criteria","Price, camera, battery, storage, durability, warranty and software updates."],
+   ["Beliefs and attitudes","The student may believe one brand is more reliable or feel more comfortable with a familiar interface."]],
+   example:"The student shortlists three phones and gives extra weight to camera quality and battery life.",
+   use:"Useful for studying product attributes, comparison tools and how consumers narrow their choices.",
+   limit:"Consumers may use shortcuts, emotion, habit or social influence rather than carefully scoring every attribute."
+  },
+  purchase:{title:"4. Purchase",tag:"EKB · Decision stage 4",definition:"The consumer makes or completes the purchase, although the final act can still be affected by situational factors.",constituents:[
+   ["Purchase decision","Choosing the model, seller, timing and payment method."],
+   ["Situational factors","Discounts, availability, delivery, family approval or unexpected costs."]],
+   example:"A bank offer makes one shortlisted phone cheaper, so the student buys it.",
+   use:"Useful for investigating conversion barriers between product consideration and completed purchase.",
+   limit:"The selected option may change at the last moment; intention does not guarantee action."
+  },
+  post:{title:"5. Post-purchase evaluation",tag:"EKB · Decision stage 5",definition:"After using the product, the consumer compares actual experience with expectations.",constituents:[
+   ["Satisfaction or dissatisfaction","The phone performs as expected—or disappoints on battery, camera or service."],
+   ["Future behaviour","Recommendation, review, complaint, repeat purchase, switching or return."]],
+   example:"After a month, the student is satisfied with the camera but unhappy with heating and tells friends.",
+   use:"Useful for studying loyalty, reviews, service recovery, repeat purchases and word of mouth.",
+   limit:"Satisfaction is not determined by performance alone; expectations and personal circumstances also matter."
+  },
+  processing:{title:"Information processing",tag:"EKB · Process influencing decisions",definition:"The EKB framework also considers how consumers encounter, attend to, understand, accept and retain information.",constituents:[
+   ["Exposure and attention","The student sees a phone advertisement, but may scroll past it or focus on its price."],
+   ["Comprehension and acceptance","The student interprets the claim and decides whether it seems credible."],
+   ["Retention","The student remembers the brand or feature later when comparing phones."]],
+   example:"A student remembers a battery-life claim from an ad and checks it against independent reviews.",
+   use:"Useful for exploring how marketing information is noticed, understood and remembered.",
+   limit:"Seeing a message does not mean it was understood or accepted."
+  },
+  influences:{title:"Individual and environmental influences",tag:"EKB · Influences",definition:"Decision stages are shaped by individual differences and the social and environmental context.",constituents:[
+   ["Individual influences","Motivation, personality, values, attitudes, knowledge, lifestyle and available resources."],
+   ["Environmental influences","Culture, family, social class, reference groups, situation and other people."],
+   ["Example of interaction","A student's budget sets a limit, while family advice changes which phone is considered trustworthy."]],
+   example:"Two students with similar budgets choose different phones because one prioritises gaming and the other prioritises photography and family advice.",
+   use:"Useful for studying why buyers move through similar stages but make different choices.",
+   limit:"Influences interact; one factor alone rarely explains a decision."
+  }
+ },
+ hs:{
+  stimuli:{title:"INPUTS / STIMULI",tag:"Howard–Sheth · Inputs",definition:"The model distinguishes different sources of stimuli that can provide information about brands and influence the buyer.",constituents:[
+   ["Significative stimuli","Direct, tangible brand or product information such as price, features, quality claims and packaging."],
+   ["Symbolic stimuli","Brand information communicated through advertising and other symbolic messages."],
+   ["Social stimuli","Information from family, friends and other social sources."]],
+   example:"The student reads phone specifications, sees a brand advertisement and asks a friend which phone is reliable.",
+   use:"Useful for separating product information, marketing communication and social influence in brand choice.",
+   limit:"Stimuli alone do not determine choice; how the consumer perceives and learns from them matters."
+  },
+  perceptual:{title:"PERCEPTUAL CONSTRUCTS",tag:"Howard–Sheth · Perception",definition:"Perceptual constructs describe how consumers receive, interpret and sometimes distort or selectively attend to information.",constituents:[
+   ["Attention","The student notices the camera and price but ignores a detail about software updates."],
+   ["Perceptual bias","Prior beliefs or preferences can influence how a claim is interpreted."],
+   ["Ambiguity and interpretation","A technical specification may be unclear, so the student searches for an explanation."]],
+   example:"A student who already trusts a brand may interpret its advertisement more favourably than a similar advertisement from an unfamiliar brand.",
+   use:"Useful for investigating why the same product message can be understood differently by different consumers.",
+   limit:"Perceptions are not directly observable; researchers need appropriate measures and evidence."
+  },
+  learning:{title:"LEARNING CONSTRUCTS",tag:"Howard–Sheth · Learning",definition:"Learning constructs represent internal factors and processes involved in developing preferences, attitudes, intentions and brand choices.",constituents:[
+   ["Motives","The student's main goal may be photography, gaming, study or long battery life."],
+   ["Choice criteria","The features the student uses to compare brands."],
+   ["Brand comprehension and attitudes","What the student believes about each brand and how positively or negatively they evaluate it."],
+   ["Intention","The brand the student is inclined to purchase, before the actual purchase occurs."]],
+   example:"After comparing reviews and remembering a reliable previous phone, the student forms a favourable attitude and intends to buy that brand.",
+   use:"Useful for explaining how experience and information can shape brand preference and intention.",
+   limit:"The full model contains more detailed constructs and relationships; this summary is not a substitute for its formal diagram."
+  },
+  outputs:{title:"OUTPUTS",tag:"Howard–Sheth · Outputs",definition:"The model describes responses that can progress from attention and comprehension through attitude and intention to purchase.",constituents:[
+   ["Attention and comprehension","The buyer notices and understands information about a phone."],
+   ["Attitude and intention","The buyer develops an evaluation and preference for a brand."],
+   ["Purchase behaviour","The buyer completes the transaction—or does not, if circumstances intervene."]],
+   example:"The student notices a brand, understands its features, prefers it, plans to buy it and finally completes the purchase.",
+   use:"Useful for separating earlier responses and intentions from actual buying behaviour.",
+   limit:"A favourable attitude or intention does not guarantee a purchase."
+  },
+  exogenous:{title:"EXOGENOUS VARIABLES",tag:"Howard–Sheth · Context",definition:"These are contextual variables that can affect the decision process but are not simply another step in the sequence.",constituents:[
+   ["Personal and situational context","Budget, time pressure, access to stores or internet, and other circumstances relevant to the version being taught."],
+   ["Social and cultural context","Family expectations, reference groups and cultural factors may shape the decision."]],
+   example:"The student prefers one phone, but a tight budget or a parent's contribution changes the final choice.",
+   use:"Useful for remembering that consumer choice is affected by context beyond the central perceptual and learning processes.",
+   limit:"The exact variables and placement should follow the full Howard–Sheth diagram in the prescribed course source."
+  },
+  feedback:{title:"FEEDBACK AND EXPERIENCE",tag:"Howard–Sheth · Learning over time",definition:"The consumer's experience with a brand can influence later learning, attitudes and decisions. This is a conceptual learning loop rather than a separate fifth stage.",constituents:[
+   ["Experience","The phone meets or fails to meet expectations."],
+   ["Updated beliefs","The consumer revises beliefs about battery life, durability or customer service."],
+   ["Future choices","The consumer may repeat the brand, switch or recommend it to others."]],
+   example:"After a phone lasts well for three years, the student may trust the brand more when choosing the next phone.",
+   use:"Useful for thinking about repeat purchase, brand learning and how experience changes later decisions.",
+   limit:"The exact feedback links differ by model representation; consult the prescribed formal diagram."
+  }
+ }
+};
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function render(model,key){
+ const d=content[model][key]; if(!d)return;
+ document.querySelectorAll(`[data-model="${model}"]`).forEach(b=>b.classList.toggle('active',b.dataset.key===key));
+ const target=document.getElementById('detail-'+model);
+ const constituents=(d.constituents||[]).map(([title,desc])=>`<div class="info"><h4>${escapeHtml(title)}</h4><p>${escapeHtml(desc)}</p></div>`).join('');
+ target.innerHTML=`
+  <div class="detail-top"><div><span class="pill">${escapeHtml(d.tag)}</span><h3 style="margin-top:8px">${escapeHtml(d.title)}</h3></div></div>
+  <p>${escapeHtml(d.definition)}</p>
+  ${constituents?`<div class="detail-grid">${constituents}</div>`:''}
+  <div class="detail-grid">
+   <div class="info"><h4>📱 Mobile-purchase example</h4><p>${escapeHtml(d.example)}</p></div>
+   <div class="info"><h4>🎯 When is this useful?</h4><p>${escapeHtml(d.use)}</p></div>
+   <div class="info" style="grid-column:1/-1"><h4>⚠️ Limitation / caution</h4><p>${escapeHtml(d.limit)}</p></div>
+  </div>
+  <div class="backline"><button class="secondary" type="button" onclick="document.getElementById('${model}').scrollIntoView({behavior:'smooth',block:'start'})">Back to ${model==='hs'?'Howard–Sheth':model==='ekb'?'EKB':model==='iop'?'IOP / IPO':'Nicosia'} diagram ↑</button></div>`;
+}
+document.querySelectorAll('.node[data-model]').forEach(b=>b.addEventListener('click',()=>render(b.dataset.model,b.dataset.key)));
+Object.keys(content).forEach(m=>render(m,Object.keys(content[m])[0]));
+document.getElementById('expandAll').addEventListener('click',()=>document.querySelectorAll('.detail').forEach(x=>x.classList.remove('hidden')));
+document.getElementById('collapseAll').addEventListener('click',()=>document.querySelectorAll('.detail').forEach(x=>x.classList.add('hidden')));
+document.querySelectorAll('.node').forEach(b=>b.addEventListener('click',()=>document.getElementById('detail-'+b.dataset.model).classList.remove('hidden')));
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+
+const quiz=[
+ {q:"Which model is especially useful for mapping need recognition, search, evaluation, purchase and post-purchase evaluation?",o:["Nicosia","EKB","IOP / IPO","Howard–Sheth"],a:1,why:"These are the familiar EKB decision stages, although actual decisions may not be linear."},
+ {q:"Which Nicosia field concerns the firm's communication and consumer attributes?",o:["Field 1","Field 2","Field 3","Field 4"],a:0,why:"Field 1 includes firm communication/attributes and consumer attributes or predispositions."},
+ {q:"A researcher wants to examine perception, learning, motives and brand choice in more detail. Which model is a strong candidate?",o:["Howard–Sheth","IOP / IPO only","EKB only","None"],a:0,why:"Howard–Sheth contains detailed perceptual and learning constructs relevant to brand choice."},
+ {q:"What is an important caution about the IOP / IPO framework?",o:["It always has exactly five stages","It is a broad framework and versions can differ","It only explains advertisements","It cannot describe outcomes"],a:1,why:"IOP/IPO is not one universally standardised consumer behaviour model; follow the course's specific version."},
+ {q:"A buyer intends to purchase a phone but it is out of stock. What does this illustrate?",o:["Intention always equals purchase","A purchase can be affected by situational barriers","The consumer did not have a need","Feedback is impossible"],a:1,why:"A favourable intention does not guarantee a completed purchase."}
+];
+const quizRoot=document.getElementById('quizItems');
+function drawQuiz(){
+ quizRoot.innerHTML='';
+ quiz.forEach((q,i)=>{
+  const div=document.createElement('div');div.className='quiz-item';
+  div.innerHTML=`<p>${i+1}. ${escapeHtml(q.q)}</p>`+q.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${escapeHtml(o)}</label>`).join('')+`<div class="feedback" id="feedback${i}"></div>`;
+  quizRoot.appendChild(div);
+  div.querySelectorAll('input').forEach(input=>input.addEventListener('change',()=>{
+   const f=document.getElementById('feedback'+i);
+   if(Number(input.value)===q.a) f.innerHTML=`<span class="good">Correct.</span> ${escapeHtml(q.why)}`;
+   else f.innerHTML=`<span class="bad">Not quite.</span> ${escapeHtml(q.why)}`;
+  }));
+ });
+}
+drawQuiz();
+document.getElementById('resetQuiz').addEventListener('click',drawQuiz);
+</script>
+</body>
+</html>

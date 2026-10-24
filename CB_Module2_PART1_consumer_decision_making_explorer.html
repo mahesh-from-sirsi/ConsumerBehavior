@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consumer Decision-Making Explorer | VTU MBA</title>
+<style>
+:root{--ink:#172033;--muted:#5b6475;--line:#d9deea;--paper:#fff;--bg:#f4f6fa;--blue:#2457a7;--bluep:#eaf1ff;--green:#176b4d;--greenp:#e5f6ee;--amber:#8a5600;--amberp:#fff2d8;--purple:#6841a5;--purplep:#f2eaff;--red:#a73535;--redp:#ffebeb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:#172b4d;color:white;padding:28px 20px}header .wrap,main{max-width:1120px;margin:auto}h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15;margin:0 0 10px}header p{max-width:820px;margin:0;color:#e2e9f7}
+main{padding:20px 16px 60px}.notice{background:#fff8e7;border:1px solid #f1d48e;padding:13px 15px;border-radius:12px;margin:16px 0 22px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}nav button,.btn{border:1px solid var(--line);background:white;color:var(--ink);border-radius:10px;padding:10px 13px;font-weight:650;cursor:pointer}nav button[aria-selected=true]{background:var(--blue);border-color:var(--blue);color:white}
+section{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 3px 12px #1720330a}
+h2{font-size:1.45rem;margin:0 0 8px}h3{font-size:1.08rem;margin:0 0 6px}p{margin:7px 0 12px}.muted{color:var(--muted)}.small{font-size:.9rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.stage,.concept{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff;text-align:left;width:100%;color:inherit;cursor:pointer;transition:transform .12s,box-shadow .12s}.stage:hover,.concept:hover{box-shadow:0 4px 14px #17203318;transform:translateY(-1px)}.stage strong,.concept strong{display:block;margin-bottom:4px}.stage span,.concept span{font-size:.92rem;color:var(--muted)}.stage[aria-pressed=true],.concept[aria-pressed=true]{outline:3px solid #8fb2f8;border-color:var(--blue)}
+.detail{background:#f7f9fd;border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:14px;min-height:95px}.pill{display:inline-block;font-size:.78rem;font-weight:750;letter-spacing:.03em;text-transform:uppercase;border-radius:999px;padding:3px 9px;background:var(--bluep);color:var(--blue);margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{border:1px solid var(--line);border-radius:12px;padding:14px}.blue{background:var(--bluep)}.green{background:var(--greenp)}.amber{background:var(--amberp)}.purple{background:var(--purplep)}.red{background:var(--redp)}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.94rem}th,td{text-align:left;vertical-align:top;border:1px solid var(--line);padding:10px}th{background:#edf1f8}tr:nth-child(even) td{background:#fafbfe}
+label{display:block;font-weight:650;margin:10px 0 5px}select,textarea,input[type=text]{width:100%;padding:10px;border:1px solid #aeb8ca;border-radius:9px;font:inherit;background:white}textarea{min-height:88px;resize:vertical}.answer{margin-top:10px;padding:12px;border-radius:10px;background:#f1f4fa;border:1px solid var(--line)}.correct{background:var(--greenp);border-color:#a6dbc2}.incorrect{background:var(--redp);border-color:#edb7b7}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row .btn.primary{background:var(--blue);color:white;border-color:var(--blue)}.hidden{display:none}.kicker{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:750}.progress{height:8px;background:#e5e9f1;border-radius:99px;overflow:hidden}.progress div{height:100%;background:var(--blue);width:0%;transition:width .2s}.foot{font-size:.86rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:18px}
+@media(max-width:700px){.two{grid-template-columns:1fr}section{padding:15px}table{display:block;overflow-x:auto}}
+@media print{body{background:white;font-size:11pt}header{background:white;color:#172033;padding:10px 0}header p{color:#333}main{padding:0}nav,.btn,.stage,.concept{display:none!important}section{box-shadow:none;break-inside:avoid;border:1px solid #aaa;padding:12px}.detail,.hidden{display:block!important} .grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="kicker" style="color:#b9d0ff">VTU MBA · CONSUMER BEHAVIOUR</div><h1>Consumer Decision-Making Explorer</h1><p>Understand how consumers decide, how much effort they invest, and four perspectives that explain their behaviour. Explore, test your reasoning, and practise applying concepts to everyday purchases.</p></div></header>
+<main>
+<div class="notice"><strong>How to learn with this tool:</strong> Read the scenario, predict an answer before clicking, and explain <em>why</em> it fits. A correct answer without a reason may indicate recognition rather than full understanding.</div>
+<nav role="tablist" aria-label="Learning sections">
+<button role="tab" aria-selected="true" data-tab="process">1. Buying process</button>
+<button role="tab" aria-selected="false" data-tab="levels">2. Decision levels</button>
+<button role="tab" aria-selected="false" data-tab="views">3. Four views</button>
+<button role="tab" aria-selected="false" data-tab="compare">4. Compare & apply</button>
+<button role="tab" aria-selected="false" data-tab="quiz">5. Self-check</button>
+</nav>
+
+<div id="process" class="tab">
+<section><div class="kicker">Topic A</div><h2>Consumer Buying Decision Process</h2><p>One common textbook framework describes five stages. The framework helps us analyse decisions; it does not mean every purchase follows every stage in a rigid order.</p>
+<div class="grid" id="processStages">
+<button class="stage" data-detail="need" aria-pressed="true"><strong>1. Need recognition</strong><span>A gap appears between the current and desired state.</span></button>
+<button class="stage" data-detail="search" aria-pressed="false"><strong>2. Information search</strong><span>Look for information from memory and external sources.</span></button>
+<button class="stage" data-detail="evaluate" aria-pressed="false"><strong>3. Evaluation of alternatives</strong><span>Compare options using relevant criteria.</span></button>
+<button class="stage" data-detail="purchase" aria-pressed="false"><strong>4. Purchase decision</strong><span>Select an option and complete—or abandon—the purchase.</span></button>
+<button class="stage" data-detail="post" aria-pressed="false"><strong>5. Post-purchase behaviour</strong><span>Evaluate the experience against expectations.</span></button>
+</div>
+<div class="detail" id="processDetail" aria-live="polite"></div>
+</section>
+<section><h2>See the whole process in one example</h2><p class="muted">Scenario: a student's phone battery is failing.</p>
+<table><thead><tr><th>Stage</th><th>What the student might do</th><th>Useful question</th></tr></thead><tbody>
+<tr><td>Need recognition</td><td>Realises the phone no longer lasts through a day.</td><td>What problem or need has become noticeable?</td></tr>
+<tr><td>Information search</td><td>Checks reviews, asks friends, visits websites or shops.</td><td>What information can help?</td></tr>
+<tr><td>Evaluation</td><td>Compares battery, price, camera, storage and reliability.</td><td>Which option best fits my criteria?</td></tr>
+<tr><td>Purchase decision</td><td>Chooses a model and seller; delivery fees or stock may change the plan.</td><td>What will I actually buy?</td></tr>
+<tr><td>Post-purchase evaluation</td><td>Judges performance, feels satisfied or disappointed, and may recommend or complain.</td><td>Did the product meet expectations?</td></tr>
+</tbody></table>
+<div class="card amber"><strong>Important nuance</strong><p>Consumers may loop back, skip stages, postpone a purchase or abandon it. Buying toothpaste may involve little deliberate search; buying a costly laptop may involve much more.</p></div>
+</section>
+</div>
+
+<div id="levels" class="tab hidden">
+<section><div class="kicker">Topic B</div><h2>Levels of Consumer Decision Making</h2><p>These levels describe the <strong>amount of problem-solving effort</strong> used for a purchase—not three fixed kinds of people. The same person can use different levels for different purchases.</p>
+<div class="grid" id="levelCards">
+<button class="concept" data-detail="extensive" aria-pressed="true"><strong>Extensive problem solving</strong><span>High effort; criteria and brand knowledge may be limited.</span></button>
+<button class="concept" data-detail="limited" aria-pressed="false"><strong>Limited problem solving</strong><span>Some criteria are known; more information helps refine the choice.</span></button>
+<button class="concept" data-detail="routine" aria-pressed="false"><strong>Routinized response behaviour</strong><span>Familiar purchase; established criteria and little new search.</span></button>
+</div>
+<div class="detail" id="levelDetail" aria-live="polite"></div>
+</section>
+<section><h2>Compare the levels</h2>
+<table><thead><tr><th>Dimension</th><th>Extensive</th><th>Limited</th><th>Routinized response</th></tr></thead><tbody>
+<tr><td>Consumer's familiarity</td><td>Low or insufficient</td><td>Some familiarity</td><td>High, based on experience</td></tr>
+<tr><td>Evaluation criteria</td><td>Need to establish or clarify them</td><td>Basic criteria exist; refine them</td><td>Already established</td></tr>
+<tr><td>Information search</td><td>Broad and relatively intensive</td><td>Focused, limited search</td><td>Little or none beyond memory or habit</td></tr>
+<tr><td>Example</td><td>First laptop purchase</td><td>Choosing a different phone brand after comparing a few models</td><td>Buying the usual brand of toothpaste</td></tr>
+<tr><td>Marketing implication</td><td>Provide useful education, comparisons and reassurance</td><td>Make differences and relevant benefits easy to compare</td><td>Maintain availability, familiarity and consistent experience</td></tr>
+</tbody></table>
+<div class="card blue"><strong>Don't confuse these with the five stages.</strong><p>The five stages describe <em>what may happen during a decision</em>. The three levels describe <em>how much effort and problem-solving the consumer uses</em>.</p></div>
+</section>
+</div>
+
+<div id="views" class="tab hidden">
+<section><div class="kicker">Topic C</div><h2>Four Views of Consumer Decision Making</h2><p>These are four broad perspectives on what drives consumer decisions. They are explanatory lenses, not mutually exclusive categories of people.</p>
+<div class="grid" id="viewCards">
+<button class="concept" data-detail="economic" aria-pressed="true"><strong>Economic view</strong><span>Consumer as a rational maximiser.</span></button>
+<button class="concept" data-detail="passive" aria-pressed="false"><strong>Passive view</strong><span>Consumer as susceptible to marketers.</span></button>
+<button class="concept" data-detail="cognitive" aria-pressed="false"><strong>Cognitive view</strong><span>Consumer as an active problem solver.</span></button>
+<button class="concept" data-detail="emotional" aria-pressed="false"><strong>Emotional view</strong><span>Consumer influenced by feelings and moods.</span></button>
+</div>
+<div class="detail" id="viewDetail" aria-live="polite"></div>
+</section>
+<section><h2>Four views at a glance</h2>
+<table><thead><tr><th>View</th><th>Assumption about the consumer</th><th>Example</th><th>Limitation</th></tr></thead><tbody>
+<tr><td>Economic</td><td>Compares options rationally to maximise utility, assuming sufficient information and decision ability.</td><td>Compares total cost, specifications and warranty before buying a laptop.</td><td>Real consumers rarely know every alternative or calculate every consequence; time and information are limited.</td></tr>
+<tr><td>Passive</td><td>Is portrayed as largely influenced by marketing and may respond to promotional pressure.</td><td>Buys because a celebrity endorsement or repeated advertisement is persuasive.</td><td>Underestimates consumer agency, scepticism, preferences and resistance to persuasion.</td></tr>
+<tr><td>Cognitive</td><td>Actively processes information and seeks a satisfactory solution, often using shortcuts.</td><td>Reads a few trusted reviews and compares two shortlisted phones.</td><td>Consumers do not always search or reason carefully; feelings and habits matter too.</td></tr>
+<tr><td>Emotional</td><td>Feelings, mood, identity, affection or symbolic meaning can shape choices.</td><td>Buys a gift because it feels meaningful, or chooses a team jersey out of loyalty.</td><td>Not every emotional purchase is irrational; emotions can coexist with practical evaluation.</td></tr>
+</tbody></table>
+<div class="card purple"><strong>Core insight</strong><p>One purchase can involve several views. A buyer may compare prices (economic), use trusted reviews (cognitive), feel attached to a brand (emotional), and still be influenced by an advertisement (passive influence).</p></div>
+</section>
+</div>
+
+<div id="compare" class="tab hidden">
+<section><div class="kicker">Transfer learning</div><h2>Compare the concepts using one situation</h2><p>Choose a situation and consider three different questions: what stage is happening, how much effort is being used, and what perspective might help explain the choice?</p>
+<label for="scenario">Choose a scenario</label><select id="scenario">
+<option value="laptop">First-time laptop buyer comparing multiple brands</option>
+<option value="toothpaste">A person buys their usual toothpaste without searching</option>
+<option value="gift">A person buys a sentimental gift for a family member</option>
+<option value="ad">A person buys shoes after seeing a celebrity advertisement</option>
+</select>
+<div id="scenarioOutput" class="detail" aria-live="polite"></div>
+</section>
+<section><h2>Misconception clinic</h2><p>Read each claim. Decide whether it is sound, then reveal the reasoning.</p>
+<div class="card"><strong>Claim 1</strong><p>“Every consumer must pass through all five buying stages in order.”</p><button class="btn" data-reveal="mis1">Reveal explanation</button><div id="mis1" class="answer hidden">Incorrect. The stages are a framework. Consumers can skip stages, revisit them, postpone or abandon purchases. The amount of deliberation depends on the consumer and situation.</div></div>
+<div class="card" style="margin-top:12px"><strong>Claim 2</strong><p>“A consumer who buys emotionally is never rational.”</p><button class="btn" data-reveal="mis2">Reveal explanation</button><div id="mis2" class="answer hidden">Incorrect. Emotion and deliberation can coexist. A person can compare practical options and also choose based on affection, identity, mood or symbolic meaning.</div></div>
+<div class="card" style="margin-top:12px"><strong>Claim 3</strong><p>“Extensive problem solving is a personality type.”</p><button class="btn" data-reveal="mis3">Reveal explanation</button><div id="mis3" class="answer hidden">Incorrect. It describes decision effort in a purchase situation. The same person may carefully research a laptop but routinely buy their usual groceries.</div></div>
+</section>
+</div>
+
+<div id="quiz" class="tab hidden">
+<section><div class="kicker">Private self-check</div><h2>Test your understanding</h2><p>Answer first, then check. No public scores or leaderboard.</p>
+<div class="progress" aria-label="Quiz progress"><div id="progressBar"></div></div><p class="small muted" id="progressText">Question 1 of 8</p>
+<div id="questionBox"></div><div class="row" style="margin-top:12px"><button id="checkBtn" class="btn primary">Check answer</button><button id="nextBtn" class="btn" disabled>Next question</button><button id="restartBtn" class="btn">Restart</button></div><div id="quizFeedback" class="answer hidden" aria-live="polite"></div><p id="scoreText" class="muted"></p>
+</section>
+<section><h2>Exam-ready answer structure</h2><div class="two">
+<div class="card"><h3>For a 5-mark answer</h3><ol><li>Define the concept.</li><li>State the key stages or types.</li><li>Explain each briefly with one consistent example.</li></ol></div>
+<div class="card"><h3>For a 7- or 10-mark answer</h3><ol><li>Give a precise definition/introduction.</li><li>Explain all stages or views with examples.</li><li>Include a comparison or diagram where useful.</li><li>Discuss implications or limitations.</li><li>Conclude by linking the concept to consumer/marketing decisions.</li></ol></div>
+</div><p class="small muted">Follow the exact terminology and answer structure prescribed by your current VTU scheme and class notes.</p></section>
+</div>
+
+<section><h2>Quick distinction to remember</h2><div class="two">
+<div class="card blue"><h3>Buying decision process</h3><p><strong>What may happen?</strong> Need recognition → information search → evaluation → purchase → post-purchase evaluation.</p></div>
+<div class="card green"><h3>Levels of decision making</h3><p><strong>How much effort?</strong> Extensive problem solving → limited problem solving → routinized response behaviour.</p></div>
+<div class="card amber"><h3>Four views</h3><p><strong>How might we explain it?</strong> Economic, passive, cognitive and emotional perspectives.</p></div>
+<div class="card purple"><h3>They are not competing lists</h3><p>A single purchase can be analysed with all three frameworks because each answers a different question.</p></div>
+</div></section>
+
+<section><h2>References and accuracy notes</h2><ul>
+<li>VTU MBA Consumer Behaviour syllabus (2022 scheme), Module 2 and listed learning resources.</li>
+<li>Schiffman, Kanuk and Ramesh Kumar, <em>Consumer Behaviour</em> / <em>Consumer Behavior</em> (use the edition prescribed by your institution).</li>
+<li>Blackwell and Engel, <em>Consumer Behavior</em> (Indian edition listed in the syllabus).</li>
+<li>Cross-checking sources used to verify the framework: VTU syllabus listing; Pearson's official catalogue for Schiffman's textbook; publicly accessible educational materials summarising the three decision-making levels and four views.</li>
+</ul><p class="small muted">This is a teaching aid, not a substitute for the prescribed textbook. Exact wording, edition details and page numbers should be checked against the physical or licensed edition available to the department. Examples are illustrative.</p><div class="foot">Keyboard tip: use Tab to move between controls and Enter/Space to activate buttons. Use your browser's Print command to save a classroom handout or PDF.</div><div class="row" style="margin-top:12px"><button class="btn primary" onclick="window.print()">Print / Save as PDF</button><button class="btn" id="expandAll">Show all explanations</button></div></section>
+</main>
+<script>
+const processInfo={
+need:{title:"Need recognition",tag:"Stage 1",body:"The consumer notices a difference between the current state and a desired state. The need may arise from an internal cue (hunger, a failing battery) or an external cue (an advertisement, seeing a friend's product).",example:"Phone example: the battery no longer lasts through the day, so the student begins considering a replacement.",think:"If the phone works perfectly but a new model looks attractive, what might have triggered the desire? An external cue can activate or strengthen a want; the consumer still decides whether it matters."},
+search:{title:"Information search",tag:"Stage 2",body:"The consumer looks for information. Internal search uses memory and past experience; external search uses sources such as family, friends, reviews, sellers and websites. Search depth varies.",example:"The student recalls a friend's reliable phone and checks reviews for two other models.",think:"More search is likely when the purchase is costly, unfamiliar or risky—but it is not automatic."},
+evaluate:{title:"Evaluation of alternatives",tag:"Stage 3",body:"The consumer compares options using criteria that matter to them. Criteria may include price, performance, quality, convenience, brand trust or social meaning. Different consumers weight criteria differently.",example:"The student ranks battery life and warranty above camera quality, then compares shortlisted models.",think:"Two people can see the same specifications and choose differently because their needs and weights differ."},
+purchase:{title:"Purchase decision",tag:"Stage 4",body:"A preferred option does not guarantee a completed purchase. Budget, availability, delivery cost, payment problems, other people's opinions or a last-minute promotion can change the final action.",example:"The student prefers one phone but chooses another because the preferred model is out of stock.",think:"Distinguish purchase intention (what the person plans to do) from purchase behaviour (what the person actually does)."},
+post:{title:"Post-purchase behaviour",tag:"Stage 5",body:"After use, the consumer compares experience with expectations. The result can be satisfaction, dissatisfaction, complaint, recommendation, repeat purchase or cognitive dissonance (doubt about whether the right choice was made).",example:"The phone performs well, so the student recommends it. If the battery disappoints, the student may complain or avoid the brand next time.",think:"Post-purchase experience can influence future decisions and word-of-mouth."}
+};
+const levelInfo={
+extensive:{title:"Extensive problem solving",tag:"High decision effort",body:"The consumer lacks enough experience or established criteria and must learn what matters, identify alternatives and compare them. Information search and evaluation are usually more extensive.",example:"A student buying a laptop for the first time researches processor, memory, battery, service, price and software needs.",think:"High price, unfamiliarity, perceived risk and important consequences may encourage extensive effort. It is not guaranteed solely by price."},
+limited:{title:"Limited problem solving",tag:"Moderate decision effort",body:"The consumer has some criteria or familiarity but needs additional information to refine the choice among a manageable set of alternatives.",example:"The student knows the desired budget and battery life, and compares three phone models before deciding.",think:"The task is often to fine-tune an existing shortlist rather than learn the whole category from scratch."},
+routine:{title:"Routinized response behaviour",tag:"Low decision effort",body:"The consumer has experience and established preferences. The choice may rely on habit, familiarity or a simple rule, with little additional search.",example:"The consumer buys the same toothpaste brand during the weekly shop without comparing every brand.",think:"Routine does not mean the consumer has no preferences or can never switch. A stockout, price change or poor experience can trigger renewed search."}
+};
+const viewInfo={
+economic:{title:"Economic view",tag:"Rational maximiser",body:"The consumer is portrayed as carefully comparing alternatives to maximise utility or value, assuming they have adequate information, can assess it, and can rank options consistently.",example:"A buyer calculates total laptop cost and compares specifications, warranty and long-term value.",think:"Useful for understanding deliberate comparison, but the full-information, perfect-rationality assumption is often unrealistic because time, attention and knowledge are limited."},
+passive:{title:"Passive view",tag:"Marketing-influenced consumer",body:"The consumer is portrayed as relatively submissive to marketers' efforts and susceptible to promotional messages, selling tactics or persuasive stimuli.",example:"A shopper buys a product after repeated advertising and a celebrity endorsement strongly influence the choice.",think:"This lens highlights persuasion but becomes misleading if it treats consumers as helpless. People can ignore ads, compare alternatives and resist persuasion."},
+cognitive:{title:"Cognitive view",tag:"Active problem solver",body:"The consumer actively seeks and processes information to solve a problem, while operating with limited time and knowledge. They may use shortcuts and settle on a satisfactory option rather than inspect every alternative.",example:"The student trusts two review sources, checks warranty terms and chooses from a shortlist.",think:"This view recognises active thought and bounded information processing, but not every purchase involves extensive deliberate reasoning."},
+emotional:{title:"Emotional view",tag:"Feelings matter",body:"Feelings, moods, memories, identity, affection and symbolic meanings can influence choice. An emotional choice can still include practical evaluation.",example:"A person chooses a particular gift because it carries personal meaning, or buys a team jersey out of loyalty.",think:"Do not equate emotional with irrational. Emotion can be central to the goal itself, as in choosing a meaningful gift."}
+};
+function fillDetail(el,obj){el.innerHTML=`<span class="pill">${obj.tag}</span><h3>${obj.title}</h3><p>${obj.body}</p><p><strong>Example:</strong> ${obj.example}</p><p><strong>Think deeper:</strong> ${obj.think}</p>`}
+function wireCards(container,info,target){const cards=[...document.querySelectorAll('#'+container+' [data-detail]')];cards.forEach(c=>c.addEventListener('click',()=>{cards.forEach(x=>x.setAttribute('aria-pressed',String(x===c)));fillDetail(document.getElementById(target),info[c.dataset.detail])}));const first=cards[0];if(first)fillDetail(document.getElementById(target),info[first.dataset.detail])}
+wireCards('processStages',processInfo,'processDetail');wireCards('levelCards',levelInfo,'levelDetail');wireCards('viewCards',viewInfo,'viewDetail');
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-selected',String(x===b)));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('hidden',x.id!==b.dataset.tab));}));
+const scenarios={
+laptop:{stage:"Information search and evaluation of alternatives are likely active.",level:"Likely extensive problem solving if this is a first-time purchase and criteria are not established.",view:"Economic and cognitive views can help explain specification and price comparison; emotion or brand identity may also matter.",why:"This example is a likely pattern, not a universal rule. Experience, budget and perceived risk can change the level of effort."},
+toothpaste:{stage:"The purchase may move quickly to purchase with little deliberate search.",level:"Likely routinized response behaviour if the brand and criteria are familiar.",view:"Cognitive shortcuts, habit and prior experience may help explain the choice. A promotion can still influence switching.",why:"Routine is about the effort used in this situation, not a permanent personality trait."},
+gift:{stage:"Need recognition may be followed by search and evaluation, but personal meaning shapes criteria.",level:"Could be limited or extensive depending on importance, familiarity and budget.",view:"The emotional view is especially useful; practical comparison can still occur.",why:"An emotional motive does not mean the decision lacks thought."},
+ad:{stage:"The ad may trigger need recognition or provide information; purchase may occur later.",level:"Could be extensive, limited or routine depending on prior knowledge and involvement.",view:"The passive view highlights promotional influence; the cognitive view asks whether the buyer actively evaluated the shoes too.",why:"Seeing an advertisement does not prove the ad caused the purchase. More evidence is needed to establish causation."}
+};
+function showScenario(){const s=scenarios[document.getElementById('scenario').value];document.getElementById('scenarioOutput').innerHTML=`<h3>Buying-process lens</h3><p>${s.stage}</p><h3>Decision-effort lens</h3><p>${s.level}</p><h3>Four-view lens</h3><p>${s.view}</p><p><strong>Reasoning note:</strong> ${s.why}</p>`}
+document.getElementById('scenario').addEventListener('change',showScenario);showScenario();
+document.querySelectorAll('[data-reveal]').forEach(b=>b.addEventListener('click',()=>{const el=document.getElementById(b.dataset.reveal);el.classList.toggle('hidden');b.textContent=el.classList.contains('hidden')?'Reveal explanation':'Hide explanation'}));
+const qs=[
+{q:"A consumer realises their old phone cannot hold a charge. Which stage is this?",opts:["Information search","Need recognition","Purchase decision","Post-purchase evaluation"],a:1,why:"The problem or gap has become noticeable, which is need recognition."},
+{q:"A shopper reads reviews and asks friends before selecting a model. What is the main activity?",opts:["Information search","Post-purchase evaluation","Routinized response behaviour","Purchase completion"],a:0,why:"Reviews and conversations are information sources. Evaluation may follow as the shopper compares options."},
+{q:"Which statement best distinguishes decision stages from decision levels?",opts:["They mean the same thing.","Stages describe possible activities; levels describe the amount of effort.","Levels happen only after purchase.","Stages apply only to expensive goods."],a:1,why:"The process framework describes what may happen; the levels framework describes the degree of problem-solving effort."},
+{q:"A first-time buyer researches laptop requirements and compares many alternatives. Which level is most likely?",opts:["Routinized response behaviour","Passive view","Extensive problem solving","Post-purchase evaluation"],a:2,why:"The buyer must establish criteria and learn about alternatives, indicating extensive problem solving."},
+{q:"A consumer repeatedly buys their usual toothpaste with almost no new search. This is most consistent with:",opts:["Extensive problem solving","Routinized response behaviour","The economic view only","Need recognition only"],a:1,why:"Familiarity and established criteria make the choice routine. It can change if circumstances change."},
+{q:"Which view most directly portrays the consumer as a rational maximiser with sufficient information?",opts:["Emotional","Passive","Economic","Cognitive"],a:2,why:"The economic view uses a strong rationality and utility-maximisation assumption."},
+{q:"A consumer actively compares a few trusted reviews and uses a shortcut to choose. Which view fits especially well?",opts:["Cognitive","Passive only","Economic only","Emotional only"],a:0,why:"The cognitive view sees consumers as active problem-solvers who may use shortcuts rather than process all possible information."},
+{q:"A person chooses a gift mainly because it carries sentimental meaning. What is the best interpretation?",opts:["The consumer is necessarily irrational.","The emotional view is useful; practical considerations may still matter.","The purchase must be routine.","This proves advertising caused the choice."],a:1,why:"Feelings and symbolic meaning can guide choice without excluding practical thought."}
+];let qi=0,score=0,answered=false;
+function renderQ(){answered=false;const q=qs[qi];document.getElementById('progressText').textContent=`Question ${qi+1} of ${qs.length}`;document.getElementById('progressBar').style.width=(qi/qs.length*100)+'%';document.getElementById('questionBox').innerHTML=`<h3>${qi+1}. ${q.q}</h3>`+q.opts.map((o,i)=>`<label style="font-weight:400;border:1px solid var(--line);border-radius:9px;padding:9px;margin:7px 0"><input type="radio" name="q" value="${i}"> ${o}</label>`).join('');document.getElementById('quizFeedback').classList.add('hidden');document.getElementById('checkBtn').disabled=false;document.getElementById('nextBtn').disabled=true;document.getElementById('nextBtn').textContent=qi===qs.length-1?'Finish':'Next question';document.getElementById('scoreText').textContent=`Correct so far: ${score}`}
+document.getElementById('checkBtn').addEventListener('click',()=>{if(answered)return;const sel=document.querySelector('input[name="q"]:checked');if(!sel){alert('Choose an answer first.');return}answered=true;const q=qs[qi],ok=Number(sel.value)===q.a;if(ok)score++;const f=document.getElementById('quizFeedback');f.classList.remove('hidden','correct','incorrect');f.classList.add(ok?'correct':'incorrect');f.innerHTML=`<strong>${ok?'Correct.':'Not quite.'}</strong> ${q.why}`;document.getElementById('checkBtn').disabled=true;document.getElementById('nextBtn').disabled=false;document.getElementById('scoreText').textContent=`Correct so far: ${score}`;document.getElementById('progressBar').style.width=((qi+1)/qs.length*100)+'%'});
+document.getElementById('nextBtn').addEventListener('click',()=>{if(qi<qs.length-1){qi++;renderQ()}else{document.getElementById('questionBox').innerHTML=`<h3>Self-check complete</h3><p>You answered ${score} out of ${qs.length} correctly.</p><p>Review the explanations for any missed concepts, then try again later with the examples hidden.</p>`;document.getElementById('progressText').textContent='Complete';document.getElementById('progressBar').style.width='100%';document.getElementById('checkBtn').disabled=true;document.getElementById('nextBtn').disabled=true;document.getElementById('scoreText').textContent=`Final score: ${score}/${qs.length}`}});
+document.getElementById('restartBtn').addEventListener('click',()=>{qi=0;score=0;renderQ()});renderQ();
+document.getElementById('expandAll').addEventListener('click',()=>{const hidden=[...document.querySelectorAll('.answer.hidden')];if(hidden.length){hidden.forEach(x=>x.classList.remove('hidden'));document.getElementById('expandAll').textContent='Hide revealed explanations'}else{document.querySelectorAll('#compare .answer').forEach(x=>x.classList.add('hidden'));document.getElementById('expandAll').textContent='Show all explanations'}});
+</script>
+</body></html>
