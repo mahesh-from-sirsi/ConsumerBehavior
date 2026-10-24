@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Consumer Behaviour learning hub for MBA students: module explorers, notes, exercises, case studies, questionnaires, MCQs and VTU exam preparation.">
+  <title>Consumer Behaviour | MBA Learning Hub</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5c667a;
+      --line: #e1e7ef;
+      --paper: #ffffff;
+      --wash: #f5f7fb;
+      --brand: #244c8f;
+      --brand-dark: #17376b;
+      --accent: #dbeafe;
+      --available: #176b45;
+      --available-bg: #e7f7ee;
+      --planned: #805b16;
+      --planned-bg: #fff4d8;
+      --shadow: 0 8px 28px rgba(28, 45, 78, .07);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--wash);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--brand); }
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid #f0b429;
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #17376b 0%, #285ba2 62%, #3979b9 100%);
+      color: white;
+      padding: 52px 22px 44px;
+    }
+    .hero-inner, main, footer { max-width: 1100px; margin: 0 auto; }
+    .eyebrow {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+    h1 { margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.12; letter-spacing: -.035em; }
+    .hero p { max-width: 760px; color: #edf4ff; font-size: 1.08rem; margin: 18px 0 0; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+    .hero-actions a {
+      display: inline-block; padding: 10px 15px; border-radius: 10px;
+      text-decoration: none; font-weight: 700; background: white; color: var(--brand-dark);
+    }
+    .hero-actions a.secondary { background: rgba(255,255,255,.12); color: white; border: 1px solid rgba(255,255,255,.45); }
+    main { padding: 28px 22px 52px; }
+    .notice {
+      background: #fff; border: 1px solid var(--line); border-left: 5px solid #4d79bb;
+      border-radius: 12px; padding: 15px 18px; margin-bottom: 30px; box-shadow: var(--shadow);
+    }
+    .section { margin-top: 34px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 14px; margin-bottom: 15px; }
+    h2 { font-size: clamp(1.35rem, 3vw, 1.8rem); line-height: 1.25; margin: 0; letter-spacing: -.02em; }
+    .section-heading p { color: var(--muted); margin: 5px 0 0; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .card {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 16px;
+      padding: 20px; box-shadow: var(--shadow); min-width: 0;
+    }
+    .card-top { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+    h3 { font-size: 1.08rem; line-height: 1.35; margin: 0; }
+    .module-number {
+      flex: 0 0 auto; display: inline-grid; place-items: center; width: 42px; height: 42px;
+      border-radius: 12px; background: var(--accent); color: var(--brand-dark); font-weight: 800;
+    }
+    .status {
+      display: inline-block; border-radius: 999px; padding: 4px 9px; font-size: .75rem;
+      font-weight: 800; white-space: nowrap;
+    }
+    .status.available { background: var(--available-bg); color: var(--available); }
+    .status.planned { background: var(--planned-bg); color: var(--planned); }
+    .card p { color: var(--muted); margin: 10px 0 14px; }
+    .resource-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; }
+    .resource-list li { border-top: 1px solid #edf0f5; padding-top: 9px; }
+    .resource-list a { font-weight: 700; text-decoration: none; }
+    .resource-list a:hover { text-decoration: underline; }
+    .resource-list small { display: block; color: var(--muted); font-size: .86rem; margin-top: 2px; }
+    .planned-card { background: #fbfcfe; border-style: dashed; }
+    .planned-card p { margin-bottom: 0; }
+    .resource-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .resource-card { background: white; border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+    .resource-card .symbol { font-size: 1.5rem; margin-bottom: 8px; }
+    .resource-card h3 { margin-bottom: 7px; }
+    .resource-card p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .resource-card .coming { display: inline-block; margin-top: 12px; color: var(--planned); font-size: .8rem; font-weight: 800; }
+    .howto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .step { border-radius: 12px; background: white; border: 1px solid var(--line); padding: 16px; }
+    .step strong { display: block; margin-bottom: 5px; }
+    .step p { margin: 0; color: var(--muted); font-size: .93rem; }
+    footer { padding: 0 22px 34px; color: var(--muted); font-size: .9rem; }
+    footer a { font-weight: 700; }
+    @media (max-width: 760px) {
+      .grid, .resource-grid, .howto { grid-template-columns: 1fr; }
+      .hero { padding-top: 38px; }
+      .section-heading { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">MBA · Consumer Behaviour</span>
+      <h1>Consumer Behaviour Learning Hub</h1>
+      <p>A single starting point for module explorers, study resources, practice activities and VTU exam preparation. Open each learning resource directly—every module file works independently.</p>
+      <nav class="hero-actions" aria-label="Main navigation">
+        <a href="#modules">Explore modules</a>
+        <a class="secondary" href="#practice">Practice resources</a>
+        <a class="secondary" href="https://github.com/mahesh-from-sirsi/ConsumerBehavior" target="_blank" rel="noopener noreferrer">View GitHub repository ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="notice">
+      <strong>How to use this hub:</strong> Select an available module below to open its interactive HTML resource. Modules 4–6 and the additional practice resources will be added as they are prepared.
+    </div>
+
+    <section class="section" id="modules">
+      <div class="section-heading">
+        <div>
+          <h2>Module explorers</h2>
+          <p>Available learning resources, organised by module and part.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="card-top">
+            <div><h3>Module 1 · Introduction and Consumer Research</h3></div>
+            <span class="status available">Available</span>
+          </div>
+          <p>Explore the introduction to consumer behaviour and consumer research.</p>
+          <ul class="resource-list">
+            <li>
+              <a href="CB_Module1_consumer_behaviour_introduction_research_explorer.html">Open Module 1 explorer ↗</a>
+              <small>Introduction · Consumer behaviour · Research</small>
+            </li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div><h3>Module 2 · Consumer Decision-Making</h3></div>
+            <span class="status available">Available</span>
+          </div>
+          <p>Study decision-making, online decisions, situational influences and consumer behaviour models.</p>
+          <ul class="resource-list">
+            <li>
+              <a href="CB_Module2_PART1_consumer_decision_making_explorer.html">Part 1 — Consumer decision-making ↗</a>
+              <small>Consumer decision-making</small>
+            </li>
+            <li>
+              <a href="CB_Module2_PART2_online_decision_situational_influences_explorer.html">Part 2 — Online decisions and situational influences ↗</a>
+              <small>Online decision-making · Situational influences</small>
+            </li>
+            <li>
+              <a href="CB_Module2_PART3_consumer_behaviour_models_explorer.html">Part 3 — Consumer behaviour models ↗</a>
+              <small>Nicosia · Howard–Sheth · Engel–Kollat–Blackwell and related models</small>
+            </li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div><h3>Module 3 · Psychological Factors</h3></div>
+            <span class="status available">Available</span>
+          </div>
+          <p>Explore perception, learning, personality, self-concept, lifestyle, attitudes and motivation.</p>
+          <ul class="resource-list">
+            <li>
+              <a href="CB_MODULE3_PART1_perception_learning.html">Part 1 — Perception and learning ↗</a>
+              <small>Perception · Learning</small>
+            </li>
+            <li>
+              <a href="CB_MODULE3_PART2_personality_selfconcept_psychographics_lifestyle.html">Part 2 — Personality, self-concept and lifestyle ↗</a>
+              <small>Personality · Self-concept · Psychographics · Lifestyle</small>
+            </li>
+            <li>
+              <a href="CB_MODULE3_PART3_attitude_structural_model_formation_change.html">Part 3 — Attitudes: structure, formation and change ↗</a>
+              <small>Attitude models · Formation · Change</small>
+            </li>
+            <li>
+              <a href="CB_MODULE3_PART4_motivation_needs_goals_theories.html">Part 4 — Motivation, needs, goals and theories ↗</a>
+              <small>Motivation · Needs · Goals · Theories</small>
+            </li>
+          </ul>
+        </article>
+
+        <article class="card planned-card">
+          <div class="card-top">
+            <div><h3>Module 4</h3></div>
+            <span class="status planned">Coming soon</span>
+          </div>
+          <p>Learning resources will be listed here when the Module 4 HTML files are ready.</p>
+        </article>
+
+        <article class="card planned-card">
+          <div class="card-top">
+            <div><h3>Module 5</h3></div>
+            <span class="status planned">Coming soon</span>
+          </div>
+          <p>Learning resources will be listed here when the Module 5 HTML files are ready.</p>
+        </article>
+
+        <article class="card planned-card">
+          <div class="card-top">
+            <div><h3>Module 6</h3></div>
+            <span class="status planned">Coming soon</span>
+          </div>
+          <p>Learning resources will be listed here when the Module 6 HTML files are ready.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="practice">
+      <div class="section-heading">
+        <div>
+          <h2>Practice and exam preparation</h2>
+          <p>Additional resources planned for all modules.</p>
+        </div>
+      </div>
+      <div class="resource-grid">
+        <article class="resource-card">
+          <div class="symbol" aria-hidden="true">📝</div>
+          <h3>Notes and revision guides</h3>
+          <p>Concise topic notes, concept summaries, comparisons and revision aids.</p>
+          <span class="coming">Planned · All modules</span>
+        </article>
+        <article class="resource-card">
+          <div class="symbol" aria-hidden="true">🎯</div>
+          <h3>Exercises and questionnaires</h3>
+          <p>Topic-wise practice, self-check activities and questionnaires to reinforce learning.</p>
+          <span class="coming">Planned · All modules</span>
+        </article>
+        <article class="resource-card">
+          <div class="symbol" aria-hidden="true">💡</div>
+          <h3>Case studies</h3>
+          <p>Consumer and marketing situations for application, discussion and analysis.</p>
+          <span class="coming">Planned · All modules</span>
+        </article>
+        <article class="resource-card">
+          <div class="symbol" aria-hidden="true">☑️</div>
+          <h3>MCQ practice</h3>
+          <p>Module-wise multiple-choice questions for concept checks and exam practice.</p>
+          <span class="coming">Planned · All modules</span>
+        </article>
+        <article class="resource-card">
+          <div class="symbol" aria-hidden="true">🎓</div>
+          <h3>Important VTU exam questions</h3>
+          <p>Exam-focused questions organised by module and question type, as applicable.</p>
+          <span class="coming">Planned · All modules</span>
+        </article>
+        <article class="resource-card">
+          <div class="symbol" aria-hidden="true">📚</div>
+          <h3>Model answers and exam revision</h3>
+          <p>Structured answer outlines and revision resources to support exam preparation.</p>
+          <span class="coming">Planned · All modules</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="using-hub">
+      <div class="section-heading">
+        <div>
+          <h2>Using the learning hub</h2>
+          <p>A simple workflow for students.</p>
+        </div>
+      </div>
+      <div class="howto">
+        <div class="step">
+          <strong>1. Open the module</strong>
+          <p>Select the relevant module or part. It opens as a separate page.</p>
+        </div>
+        <div class="step">
+          <strong>2. Study and explore</strong>
+          <p>Work through the material and any interactive features provided in that file.</p>
+        </div>
+        <div class="step">
+          <strong>3. Practise and revise</strong>
+          <p>Use the practice resources as they become available to check your understanding.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Consumer Behaviour · MBA</strong></p>
+    <p>Learning resources are being added progressively. For repository updates, visit
+      <a href="https://github.com/mahesh-from-sirsi/ConsumerBehavior" target="_blank" rel="noopener noreferrer">the ConsumerBehavior GitHub repository</a>.
+    </p>
+  </footer>
+</body>
+</html>
