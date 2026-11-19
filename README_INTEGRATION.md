@@ -1,24 +1,11 @@
-# Module 3 – integrated update (original design preserved)
+# Consumer Behaviour – modules 1, 2 and 3 PDF integration
 
-## What changed
-- Preserved the original index.html styling and module navigation. Only the old source-dump link and study sentence were updated.
-- Preserved the four original Module 3 explorer designs, tabs, quizzes, case studies, scripts, and examples.
-- Added focused syllabus material, flow diagrams, exam-question practice and answer-reveal activities within the existing panels.
-- Added Previous/Next section controls and links between explorers.
-- Added a separate PDF viewer for the original 56-page PDF (unchanged).
-- Removed the old `CB_Module3_detailed_notes.html` source-dump page from this package; it is no longer linked.
-- All Module 1 and Module 2 files remain unchanged.
+This package retains the existing homepage style and HTML explorers. The prominent Module 3 detailed-notes link has been removed from the page header. Each module section now has its own detailed-notes PDF viewer link.
 
-## Install without commands
-1. Download and extract this ZIP.
-2. In GitHub, upload the new `CB_Module3_PDF_Viewer.html` and `ConsumerBehaviour_Module3_Detailed_Notes.pdf` to the repository root.
-3. Replace `index.html` and the four `CB_MODULE3_PART*.html` files with the versions in this package. GitHub may require you to edit/replace existing files via GitHub Desktop; simply dragging files with the same name into GitHub's upload form may not always replace them.
-4. Keep the Module 1, Module 2 and `assets` folders as they are.
-5. Commit and wait for GitHub Pages deployment.
-6. Visit `https://mahesh-from-sirsi.github.io/ConsumerBehavior/` and test each Module 3 explorer and the PDF page buttons.
+- Module 1: 49-page supplied PDF (`CB_Module1_PDF_Viewer.html`).
+- Module 2: 42-page supplied PDF (`CB_Module2_PDF_Viewer.html`).
+- Module 3: existing PDF viewer (`CB_Module3_PDF_Viewer.html`).
 
-## Content/provenance
-Educational additions follow the user's supplied 56-page `ConsumerBehaviour-Module3 Notes.pdf`. Previous-year questions are labelled as reported in the notes and should be cross-checked with the original VTU paper for exact course code, marks and wording.
+**Install:** Copy the contents of this package (not the containing folder) into your local `ConsumerBehavior` GitHub repository. Replace `index.html`, preserve `assets`, and commit and push with GitHub Desktop. Do not delete other files already in the repository.
 
-## Browser notes
-The PDF viewer uses the built-in PDF support of Chrome/Edge and `#page=N` navigation. Browser implementations may differ. The original PDF is also directly accessible.
+**Note:** The Module 1 and 2 PDF files are provided by the user; no claims are made that their question labels are independently verified VTU past papers. This package changes placement of detailed-notes links and adds two PDF viewers; it does not add new case-study or past-paper libraries.
