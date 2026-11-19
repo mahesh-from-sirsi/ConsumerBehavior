@@ -1,0 +1,1 @@
+Module-wise resource pages have been added to index.html. Case studies are instructional adaptations; MCQs are newly written practice questions. Examination question labels follow the supplied notes and are not verified against original VTU papers. PDFs are compressed versions. Copy all contents into repository root and commit/push.
